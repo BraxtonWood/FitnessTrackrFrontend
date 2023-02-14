@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.routineList {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+}
+.routine {
+  width: 30%;
+  margin: 5px;
+  
+  background-color: lightgrey;
+
+}
