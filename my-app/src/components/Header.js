@@ -27,7 +27,8 @@ function Header({token, setToken, currentUsername, setCurrentUsername}) {
                 <Link className="navBarLink" to="/">Home |</Link>
                 <Link className="navBarLink" to="/routines">Routines |</Link>
                 <Link className="navBarLink" to="/profile">Profile |</Link>
-                <Link className="navBarLink" to="/myroutines">My Routines </Link>
+                <Link className="navBarLink" to="/myroutines">My Routines | </Link>
+                <Link className="navBarLink" to="/activities">Activities</Link>
             </nav>
             <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome {currentUsername}!</p>
