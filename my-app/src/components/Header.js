@@ -2,17 +2,21 @@ import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 
-function Header({token, setToken, currentUsername, setCurrentUsername}) {
+function Header({currentUsername, setCurrentUsername}) {
+console.log("🚀 ~ file: Header.js:6 ~ Header ~ currentUsername", currentUsername)
 
    
     let navigate = useNavigate();
+    setCurrentUsername(window.localStorage.getItem("username"))
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setToken("");
-        setCurrentUsername("Please Log In");
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("username")
+        setCurrentUsername(window.localStorage.getItem("username"));
         navigate("/");
     }
+    
 
   return (
     <div className="header">
@@ -26,18 +30,23 @@ function Header({token, setToken, currentUsername, setCurrentUsername}) {
             <nav className="headerNavBarContainer">
                 <Link className="navBarLink" to="/">Home |</Link>
                 <Link className="navBarLink" to="/routines">All Routines |</Link>
-                <Link className="navBarLink" to="/profile">Profile |</Link>
                 <Link className="navBarLink" to="/activities">All Activities |</Link>
                 <Link className="navBarLink" to="/myroutines">My Routines </Link>
                 {/* // !these links are to be removed they are only for testing now */}
                 <Link className="navBarLink" to= "/newroutine">| Create a Routine </Link>
                 <Link className="navBarLink" to= "/newactivity">| Create an Activity</Link>
             </nav>
+            {(currentUsername) &&
             <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome {currentUsername}!</p>
-                {currentUsername === ("Please Log In") && <Link className="userControlsLoginLink" to="/login">Log In</Link>}
-                {currentUsername !== ("Please Log In") && <button className="userControlsLoginLink" onClick={handleSubmit} >Log Out</button>}
-            </nav>            
+                <button className="userControlsLoginLinkRight" onClick={handleSubmit} >Log Out</button>
+            </nav>}
+            {(!currentUsername) &&
+            <nav className="headerUserControlsContainer">
+                <p className="userControlsWelcome">Welcome! </p>
+                <Link className="userControlsLoginLinkLeft" to="/login">Log In</Link>
+                <Link className="userControlsLoginLinkRight" to="/signup">Sign Up</Link>
+            </nav>}                   
         </div>
     </div>
   );

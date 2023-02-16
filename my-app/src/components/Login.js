@@ -24,11 +24,11 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
     .then(result => {
       console.log(result);
       if (result.message === "you're logged in!") {
-        setToken(result.token);
+        setToken(window.localStorage.setItem("token", result.token));
         console.log(token)
         setUsername("");
         setPassword("");
-        setCurrentUsername(username);
+        setCurrentUsername(window.localStorage.setItem("username", result.user.username));
         navigate("/profile");
       } else {
         alert("User not found. Please create an account.");
