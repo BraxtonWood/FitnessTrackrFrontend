@@ -1,38 +1,130 @@
-.App {
-  text-align: center;
+body {
+  display: flex;
+  font-family:Arial, Helvetica, sans-serif ;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
   display: flex;
   flex-direction: column;
+  background-color: #9bd0ea;
+  height: 19vh;
+  width: 100vw;
+  box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.1)
+}
+.headerTop{
+  background-color :#67aacb;
+  width: 100vw;
+  box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.1);
+}
+.headerAboutContainer{
+  margin-left: 20px;
+}
+.aboutTitle{
+  font-size: 45px;
+  color:#4a4f5f;
+  margin-bottom: 5px;
+}
+.aboutSlogan{
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 0px;
+  padding-top: 0px;
+  color:#ecf9fb;
+}
+.headerLinksContainer{
+  margin-right: 20px;
+  margin-left: 20px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+}
+.headerNavBarContainer{
+  display: flex;
+}
+.navBarLink {
+  color: #4a4f5f;
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 4px;
+  font-weight: 300;
+}
+.headerUserControlsContainer{
+  display: flex;
+  align-items: center;
+}
+.userControlsWelcome {
+  color: #4a4f5f;
+}
+.userControlsLoginLink{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+
+.logIn_signUp_container{
+  display: flex;
+  width: 400px;
+  height: auto;
+  flex-direction: column;
+  color: dark;
+  justify-content: center;
+  align-items: center;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.3);
+}
+.pageTitle{
+  color: #62a1c1;
+}
+label{
+  font-size: small;
+  color: #4a4f5f;
+}
+.logIn_signUp_entry{
+  margin-bottom: 20px;
+  width: 200px;
+  border: 1px solid #67aacb;
+  background-color: #ebf0f3;
+  height: 20px;
+}
+.signUpLink{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+}
+.submitButton{
+  display: flex;
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  text-decoration: none;
+  width: 75px;
+  height: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 200;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
