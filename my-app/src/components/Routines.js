@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-//import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 //import {Routes, Route} from 'react-router-dom';
 //import Home from "./Home";
 //import User from "./User";
@@ -8,34 +8,27 @@ import React, {useEffect, useState} from 'react';
 import Header from "./Header";
 
 
-const Routines = ({token}) => {
-    const [publicRoutines, setPublicRoutines] = useState([]);
-    const [newRoutine, setNewRoutine] = useState({})
+const Routines = ({token},{publicRoutines}) => {
+    console.log("PublicRoutines:",publicRoutines);
    
-    const fetchPublicRoutines = async () => {
-        const response = await fetch('https://fitness-tracker-backend.onrender.com/api/routines', {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then(response => response.json())
-            .then(result => {
 
-              console.log("get PublicRoutines:",result);
-              setPublicRoutines(result);
-            })
-            .catch(console.error);
-    } 
-    useEffect(() => {
-        fetchPublicRoutines();
-    }, []);
-     //fetchPublicRoutines();
     const renderHelper = () => {
+        if(publicRoutines=[]){
+            return <>
+            <h4>...Loading</h4>
+            </>
+        }
         if(token){
             return <>
+            <div className='routineHeader'>
             <h1 className='routineTitle'>Public Routines:</h1>
             <div className='routineList'>
-            <h4>Create New Routine LINK</h4>
-                
+            <Link to='/myroutines'> 
+                    <button type="button">
+                        Head to My Routines to Create Your Own!
+                    </button>
+                </Link>
+            </div>    
 
                     {publicRoutines.map(routines => <div className="routine" key = {routines.id}>
                         <h3>{routines.name}</h3>
@@ -58,7 +51,20 @@ const Routines = ({token}) => {
             </>
         } else {
             return <>
-            <h1 className='routineTitle'>Public Routines:</h1>
+            <div className='routineHeader'>
+                <h1 className='routineTitle'>Public Routines:</h1>
+                <h2>Log in or Sign Up To Create Your Own</h2>
+                <Link to='/signup'> 
+                    <button type="button">
+                        Sign In
+                    </button>
+                </Link>
+                <Link to='/login'>
+                    <button type="button">
+                        Log In
+                    </button>
+                </Link>
+            </div>
             <div className='routineList'>
                 
                 

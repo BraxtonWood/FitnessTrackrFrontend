@@ -128,16 +128,20 @@ label{
   border-radius: 5px;
 }
 
-
+.routineHeader {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .routineList {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  width: 80%;
+  width: 100%;
 }
 .routine {
-  width: 30%;
+  width: 28%;
   margin: 5px;
   
   background-color: lightgrey;
