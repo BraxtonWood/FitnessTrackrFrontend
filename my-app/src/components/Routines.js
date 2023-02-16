@@ -8,8 +8,20 @@ import {Link} from 'react-router-dom';
 import Header from "./Header";
 
 
-const Routines = ({token},{publicRoutines}) => {
-    console.log("PublicRoutines:",publicRoutines);
+const Routines = ({token},{publicRoutines}, {setPublicRoutines}) => {
+    
+    const getRoutines = () => {
+        fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then(response => response.json())
+          .then(result => {
+            console.log(result);
+            setPublicRoutines(result);
+          })
+          .catch(console.error);
+    }
    
 
     const renderHelper = () => {
