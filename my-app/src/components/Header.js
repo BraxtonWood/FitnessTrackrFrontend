@@ -1,27 +1,40 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import {Routes, Route} from 'react-router-dom';
-import Home from "./Home";
-import User from "./User";
-import Routines from "./Routines";
-import Activities from "./Activities";
+import React from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
-const Header = () => {
-    return(<>
-    <h1>HEADER</h1>
-        {/* <div className="nav">
-        <Routes>
-            <Route path="/" element={ <Home/> } />
 
-            <Route path="/routines/*" element={ <Routines/> } />
+function Header({token, setToken, currentUsername, setCurrentUsername}) {
 
-            <Route path="/activities/*" element={ <Activities/> } />
+   
+    let navigate = useNavigate();
 
-            <Route path="/user/*" element={ <User/> } />  
-        </Routes>
-        
-        </div> */}
-        </>
-    );
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setToken("");
+        setCurrentUsername("Please Log In");
+        navigate("/");
+    }
+
+  return (
+    <div className="header">
+        <div className="headerTop">
+            <div className="headerAboutContainer">
+                <h1 className="aboutTitle">Fitness Trac.kr</h1>
+                <h5 className="aboutSlogan"> Get your Routine on!! </h5>
+            </div>        
+        </div>
+        <div className="headerLinksContainer">
+            <nav className="headerNavBarContainer">
+                <Link className="navBarLink" to="/">Home |</Link>
+                <Link className="navBarLink" to="/routines">Routines |</Link>
+                <Link className="navBarLink" to="/profile">Profile</Link>
+            </nav>
+            <nav className="headerUserControlsContainer">
+                <p className="userControlsWelcome">Welcome {currentUsername}!</p>
+                {currentUsername === ("Please Log In") && <Link className="userControlsLoginLink" to="/login">Log In</Link>}
+                {currentUsername !== ("Please Log In") && <button className="userControlsLoginLink" onClick={handleSubmit} >Log Out</button>}
+            </nav>            
+        </div>
+    </div>
+  );
 }
 export default Header;
