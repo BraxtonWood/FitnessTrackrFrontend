@@ -25,10 +25,13 @@ function Header({token, setToken, currentUsername, setCurrentUsername}) {
         <div className="headerLinksContainer">
             <nav className="headerNavBarContainer">
                 <Link className="navBarLink" to="/">Home |</Link>
-                <Link className="navBarLink" to="/routines">Routines |</Link>
+                <Link className="navBarLink" to="/routines">All Routines |</Link>
                 <Link className="navBarLink" to="/profile">Profile |</Link>
-                <Link className="navBarLink" to="/myroutines">My Routines | </Link>
-                <Link className="navBarLink" to="/activities">Activities</Link>
+                <Link className="navBarLink" to="/activities">All Activities |</Link>
+                <Link className="navBarLink" to="/myroutines">My Routines </Link>
+                {/* // !these links are to be removed they are only for testing now */}
+                <Link className="navBarLink" to= "/newroutine">| Create a Routine </Link>
+                <Link className="navBarLink" to= "/newactivity">| Create an Activity</Link>
             </nav>
             <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome {currentUsername}!</p>

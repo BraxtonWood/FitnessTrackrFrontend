@@ -27,7 +27,9 @@ function SignUp({username, setUsername, password, setPassword, setCurrentUsernam
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                if (result.message === "you're signed up!"){   
+                if (result.message === "thank you for signing up"){   
+                    setUsername("")
+                    setPassword("")
                     navigate("/profile")
                     setToken(result.token)
                     setCurrentUsername(username)
@@ -50,17 +52,17 @@ function SignUp({username, setUsername, password, setPassword, setCurrentUsernam
     } 
 
   return (
-    <div className="logIn_signUp_container">
+    <div className="logIn_signUp_create_edit_container">
         <h1 className="pageTitle">Sign Up </h1>
         <form onSubmit={handleSubmit} className="form">
             <label>Email Address</label><br/>
-            <input className="logIn_signUp_entry" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required/><br/>
             <label>User Name</label><br/>
-            <input className="logIn_signUp_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
             <label>Password</label><br/>
-            <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
             <label>Re-enter Password</label><br/>
-            <input className="logIn_signUp_entry" type="password" value={passwordConfirm} onChange={(event) => setPasswordConfirm(event.target.value)} required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="password" value={passwordConfirm} onChange={(event) => setPasswordConfirm(event.target.value)} required/><br/>
             <input className="submitButton" type="submit" value='Submit'></input>
         </form>
     </div>
