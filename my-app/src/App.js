@@ -22,7 +22,6 @@ function App() {
   const [userMessage, setUserMessage] = useState("")
   // const [activities, setActivities] = useState([]);
   
-
   return (
     <div>
       <Header currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken}/>
@@ -31,7 +30,7 @@ function App() {
         <Route path="/newroutine" element={ <NewRoutine token={token} setUserMessage={setUserMessage} /> } />
         <Route path="/login" element={ <Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />} />
         <Route path="/routines" element={ <Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  /> } />
-        {/* <Route path="/activities" element={ <Activities activities={activities}/> } /> */}
+        <Route path="/activities" element={ <Activities activities={activities} setActivities={setActivities}/> } />
         <Route path="/signup" element={ <SignUp username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUsername={setCurrentUsername} setToken={setToken} currentUsername={currentUsername}/>} />
         <Route path="/myroutines" element={ <MyRoutines username={username} token={token}/>}/>
         <Route path="/mymessages" element={<MessageUser currentUsername={currentUsername} userMessage={userMessage}/>}/>
