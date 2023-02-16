@@ -78,13 +78,13 @@ body {
 }
 
 
-.logIn_signUp_container{
+.logIn_signUp_create_edit_container{
   display: flex;
   width: 400px;
   height: auto;
   flex-direction: column;
   color: dark;
-  justify-content: center;
+  text-justify: center;
   align-items: center;
   margin-top: 75px;
   margin-left: auto;
@@ -95,11 +95,16 @@ body {
 .pageTitle{
   color: #62a1c1;
 }
+.pageMessage{
+  color: #4a4f5f;
+  margin-right: auto;
+  margin-left: auto;
+}
 label{
   font-size: small;
   color: #4a4f5f;
 }
-.logIn_signUp_entry{
+.logIn_signUp_create_edit_entry{
   margin-bottom: 20px;
   width: 200px;
   border: 1px solid #67aacb;
@@ -111,6 +116,11 @@ label{
   margin-bottom: 30px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: small;
+}
+.isPublic{
+  display: flex;
+  margin-bottom: 20px;
+  padding: 0;
 }
 .submitButton{
   display: flex;

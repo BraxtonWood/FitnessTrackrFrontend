@@ -8,7 +8,6 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
     fetch('https://fitness-tracker-backend.onrender.com/api/users/login', {
       method: "POST",
       headers: {
@@ -17,10 +16,10 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
       body: JSON.stringify(
         {
           username: username,
-          password: password
+          password: password,
         }
       )
-    })
+    })          
     .then(response => response.json())
     .then(result => {
       console.log(result);
@@ -37,7 +36,6 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
         setPassword("");
         navigate("/signUp");
       } 
-        
     })
     .catch(err=>console.error(err));
   }
@@ -45,13 +43,13 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
 
   
   return (
-    <div className="logIn_signUp_container">
+    <div className="logIn_signUp_create_edit_container">
         <h1 className="pageTitle">Log In </h1>
         <form onSubmit={handleSubmit} className="form">
             <label>User Name</label><br/>
-            <input className="logIn_signUp_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
             <label>Password</label><br/>
-            <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
             <input className="submitButton" type="submit" ></input>
         </form>
         <Link className="signUpLink" to="/signup">Don't have an account? Sign Up here!</Link>
