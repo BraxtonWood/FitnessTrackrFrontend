@@ -36,7 +36,7 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
                 setUserMessage("We updated your routine we are loading your routines so you can add some activities and get moving!!")
                 setName("");
                 setGoal("");
-                //! i want to look at a set timeout for this
+                //! i want to look at a set timeout for the navigate
                 // navigate("/mymessages");
                 setUserMessage("")
                 setRoutineId("")
