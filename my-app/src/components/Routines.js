@@ -14,7 +14,7 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
         console.log("getRoutines called");
         //'http://fitnesstrac-kr.herokuapp.com/api/routines'
         //'https://fitness-tracker-backend.onrender.com/api/routines'
-        fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
+        fetch('https://fitness-tracker-backend.onrender.com/api/routines', {
           headers: {
             'Content-Type': 'application/json',
           },
