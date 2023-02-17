@@ -11,6 +11,7 @@ import MyRoutines from "./components/MyRoutines";
 import NewRoutine from './components/NewRoutine';
 import MessageUser from './components/MessageUser';
 import NewActivity from './components/NewActivity';
+import AddActivity from './components/AddActivity';
 
 function App() {
   const [username, setUsername] = useState("");
@@ -34,6 +35,7 @@ function App() {
         <Route path="/myroutines" element={ <MyRoutines username={username} token={token}/>}/>
         <Route path="/mymessages" element={<MessageUser currentUsername={currentUsername} userMessage={userMessage}/>}/>
         <Route path="/newactivity" element={ <NewActivity setUserMessage={setUserMessage}/> } />
+        <Route path="/addactivity" element={ <AddActivity/> } />
       </Routes>
     </div>
   );

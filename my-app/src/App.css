@@ -120,6 +120,13 @@ label{
   font-size: small;
   color: #4a4f5f;
 }
+.selectActivity{
+    margin-bottom: 20px;
+  width: 207px;
+  border: 1px solid #67aacb;
+  background-color: #ebf0f3;
+  height: 25px;
+}
 .logIn_signUp_create_edit_entry{
   margin-bottom: 20px;
   width: 200px;

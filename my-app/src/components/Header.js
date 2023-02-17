@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 function Header({currentUsername, setCurrentUsername}) {
-console.log("🚀 ~ file: Header.js:6 ~ Header ~ currentUsername", currentUsername)
-
    
     let navigate = useNavigate();
     setCurrentUsername(window.localStorage.getItem("username"))
@@ -35,6 +33,7 @@ console.log("🚀 ~ file: Header.js:6 ~ Header ~ currentUsername", currentUserna
                 {/* // !these links are to be removed they are only for testing now */}
                 <Link className="navBarLink" to= "/newroutine">| Create a Routine </Link>
                 <Link className="navBarLink" to= "/newactivity">| Create an Activity</Link>
+                <Link className="navBarLink" to= "/addactivity">| add an Activity</Link>
             </nav>
             {(currentUsername) &&
             <nav className="headerUserControlsContainer">
