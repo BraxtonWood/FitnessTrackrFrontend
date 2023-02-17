@@ -22,6 +22,7 @@ function App() {
   const [publicRoutines, setPublicRoutines] = useState([]);
   const [userMessage, setUserMessage] = useState("")
   const [activities, setActivities] = useState([]);
+  const [routineId, setRoutineId] = useState("")
   
   return (
     <div>
