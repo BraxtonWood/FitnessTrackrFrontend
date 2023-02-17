@@ -78,8 +78,8 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
                     </button>
                 </Link>
             
-                <div className='routineList'>
-                    {publicRoutines.map(routines => <div className="routine" key = {routines.id}>
+                <div className='routineContainer'>
+                    {publicRoutines.map(routines => <div className="routineItem" key = {routines.id}>
                         <h3>{routines.name}</h3>
                         <div>Created By:{routines.creatorName}</div>
                         <div>Goal:{routines.goal}</div>
@@ -104,7 +104,7 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
     return(
 
         <>
-        
+
         <div className='routineHeader'>
                 <h1 className='routineTitle'>Public Routines:</h1>
             </div>
