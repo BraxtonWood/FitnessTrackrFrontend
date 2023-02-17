@@ -212,3 +212,7 @@ label{
   background-color: lightgrey;
   margin: 5px;
 }
+.editDeleteButtons {
+  display: flex;
+  flex-direction: row;
+}

@@ -19,9 +19,9 @@ function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"))
   const [currentUsername, setCurrentUsername] = useState(window.localStorage.getItem("username"));
   const [publicRoutines, setPublicRoutines] = useState([]);
-  const [userMessage, setUserMessage] = useState("")
+  const [userMessage, setUserMessage] = useState("");
   const [activities, setActivities] = useState([]);
-  
+  const [routineId, setRoutineId] = useState('');
   return (
     <div>
       <Header currentUsername={currentUsername} setCurrentUsername={setCurrentUsername}/>
@@ -32,10 +32,10 @@ function App() {
         <Route path="/routines" element={ <Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  /> } />
         <Route path="/activities" element={ <Activities activities={activities} setActivities={setActivities}/> } />
         <Route path="/signup" element={ <SignUp username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUsername={setCurrentUsername} setToken={setToken}/>} />
-        <Route path="/myroutines" element={ <MyRoutines username={username} token={token}/>}/>
+        <Route path="/myroutines" element={ <MyRoutines currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId}/>}/>
         <Route path="/mymessages" element={<MessageUser currentUsername={currentUsername} userMessage={userMessage}/>}/>
         <Route path="/newactivity" element={ <NewActivity setUserMessage={setUserMessage}/> } />
-        <Route path="/addactivity" element={ <AddActivity setUserMessage={setUserMessage} /> } />
+        <Route path="/addactivity" element={ <AddActivity setUserMessage={setUserMessage} routineId={routineId} /> } />
       </Routes>
     </div>
   );

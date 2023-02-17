@@ -7,7 +7,7 @@ const Activities = ({token, activities, setActivities}) => {
         console.log("getActivities called");
         //'http://fitnesstrac-kr.herokuapp.com/api/activities'
         //'https://fitness-tracker-backend.onrender.com/api/activities'
-        fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+        fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
           headers: {
             'Content-Type': 'application/json',
           },
