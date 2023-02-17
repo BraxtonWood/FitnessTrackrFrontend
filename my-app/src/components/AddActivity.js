@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom";
 // import {getAllActivities} from "../api"
 
 
-function AddActivity({setUserMessage, routineId}) {
+function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
     const [count, setCount]= useState("")
     const [duration, setDuration]= useState("")
     const [allActivities, setAllActivities] = useState([])
     const [activity, setActivity] = useState({})
     console.log(allActivities)
     console.log(activity)
-    console.log(routineId);
-    // setUserMessage("")
+
     let navigate = useNavigate();
 
 
@@ -58,6 +57,10 @@ function AddActivity({setUserMessage, routineId}) {
                     setUserMessage("Your activity was added")
                     setCount("");
                     setDuration("");
+                    //! I want to look at adding a set timeout to this
+                    navigate("/myroutines")
+                    setUserMessage("")
+                    setRoutineId("")
                 }
             })
             .catch(err=>console.error(err));
@@ -69,6 +72,7 @@ function AddActivity({setUserMessage, routineId}) {
   return (
     <div className="logIn_signUp_create_edit_container">
         <h1 className="pageTitle">Add an Activity </h1>
+        <h3 className="pageTitle">{userMessage}</h3>
         <form onSubmit={handleSubmit} className="form">
             <label>Choose an Activity</label><br/>
             <select 

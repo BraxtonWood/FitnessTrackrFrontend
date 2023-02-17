@@ -12,6 +12,7 @@ import NewRoutine from './components/NewRoutine';
 import MessageUser from './components/MessageUser';
 import NewActivity from './components/NewActivity';
 import AddActivity from './components/AddActivity';
+import UpdateRoutine from './components/UpdateRoutine'
 
 function App() {
   const [username, setUsername] = useState("");
@@ -22,9 +23,10 @@ function App() {
   const [userMessage, setUserMessage] = useState("");
   const [activities, setActivities] = useState([]);
   const [routineId, setRoutineId] = useState('');
+
   return (
     <div>
-      <Header currentUsername={currentUsername} setCurrentUsername={setCurrentUsername}/>
+      <Header currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} setToken={setToken} />
       <Routes>
         <Route path="/" element={ <Home/> } />
         <Route path="/newroutine" element={ <NewRoutine token={token} setUserMessage={setUserMessage} /> } />
@@ -35,7 +37,9 @@ function App() {
         <Route path="/myroutines" element={ <MyRoutines currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId}/>}/>
         <Route path="/mymessages" element={<MessageUser currentUsername={currentUsername} userMessage={userMessage}/>}/>
         <Route path="/newactivity" element={ <NewActivity setUserMessage={setUserMessage}/> } />
-        <Route path="/addactivity" element={ <AddActivity setUserMessage={setUserMessage} routineId={routineId} /> } />
+        <Route path="/addactivity" element={ <AddActivity setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} /> } />
+        <Route path="/updateroutine" element={ <UpdateRoutine setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} /> } />
+
       </Routes>
     </div>
   );
