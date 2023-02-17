@@ -10,7 +10,7 @@ function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
     const [activity, setActivity] = useState({})
     console.log(allActivities)
     console.log(activity)
-    
+
     let navigate = useNavigate();
 
 

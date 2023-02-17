@@ -160,6 +160,7 @@ label{
   font-weight: 200;
   border-radius: 5px;
 }
+
 .userHelperHeader {
   display:flex;
   flex-direction: row;
@@ -173,17 +174,20 @@ label{
   padding:25px;
   display:flex;
   flex-direction: column;
+
   
   
 }
-.routineList {
+.routineContainer {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
+  align-items: flex-start;
+  flex-grow: 1;
+  
+  /* width: 100%; */
 }
-.routine {
+.routineItem {
   width: 28%;
   margin: 5px;
   
@@ -199,7 +203,7 @@ label{
   justify-content: space-evenly;
   
 }
-.activity {
+.activityItem {
   width: 30%;
   display:flex;
   flex-direction: column;
@@ -207,4 +211,8 @@ label{
   justify-content: center;
   background-color: lightgrey;
   margin: 5px;
+}
+.editDeleteButtons {
+  display: flex;
+  flex-direction: row;
 }

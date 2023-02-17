@@ -7,7 +7,7 @@ const Activities = ({token, activities, setActivities}) => {
         console.log("getActivities called");
         //'http://fitnesstrac-kr.herokuapp.com/api/activities'
         //'https://fitness-tracker-backend.onrender.com/api/activities'
-        fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+        fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -59,7 +59,7 @@ const Activities = ({token, activities, setActivities}) => {
         } else {
             return <>
                 {activities.map(activity => 
-                    <div className="activity" key = {activity.id}>
+                    <div className="activityItem" key = {activity.id}>
                         <h3>{activity.name}</h3>
                         <p>Name: {activity.goal}</p>
                         <p>Description: {activity.description}</p>                   
