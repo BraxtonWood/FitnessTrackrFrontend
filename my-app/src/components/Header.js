@@ -2,10 +2,12 @@ import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 
-function Header({currentUsername, setCurrentUsername}) {
+function Header({currentUsername, setCurrentUsername, setToken}) {
    
     let navigate = useNavigate();
     setCurrentUsername(window.localStorage.getItem("username"))
+    setToken(window.localStorage.getItem("token"))
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -34,6 +36,7 @@ function Header({currentUsername, setCurrentUsername}) {
                 <Link className="navBarLink" to= "/newroutine">| Create a Routine </Link>
                 <Link className="navBarLink" to= "/newactivity">| Create an Activity</Link>
                 <Link className="navBarLink" to= "/addactivity">| add an Activity</Link>
+                <Link className="navBarLink" to= "/updateroutine">| update routine </Link>
             </nav>
             {(currentUsername) &&
             <nav className="headerUserControlsContainer">
