@@ -3,15 +3,41 @@ import {Routes, Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}){
-    //console.log("MyRoutines currentUsername:", currentUsername);
-    //console.log("MyRoutines token:", token);
-    //console.log("window.getItem: token:", window.localStorage.getItem("token"))
     setToken(window.localStorage.getItem("token"));
     console.log("token:",token);
-    //const[user, setUser] = useState('');
     const[userRoutines, setUserRoutines] = useState([]);
     
-    
+    const handleDeleteRoutine = async (routineId) => {
+        fetch(`https:fitness-tracker-backend.onrender.com/api/routines/${routineId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+        }
+        }).then(response => response.json())
+        .then(result => {
+            console.log(result);
+        })
+        .catch(console.error);
+        getUserRoutines();       
+            }
+    const handleDeleteRoutineActivity = async (routineActivityId) => {
+        console.log("routineActivityId:",routineActivityId)
+        fetch(`https:fitness-tracker-backend.onrender.com/api/routine_activities/${routineActivityId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+        }
+        }).then(response => response.json())
+        .then(result => {
+            console.log(result);
+        })
+        .catch(console.error);
+        getUserRoutines();       
+            }   
+
+
     const getUserRoutines = async () => {
         console.log("fetchUserRoutines:", currentUsername);
         //'http://fitnesstrac-kr.herokuapp.com/api/routines'
@@ -24,7 +50,7 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
           }).then(response => response.json())
             .then(result => {
               console.log(result);
-              setUserRoutines(result)
+              setUserRoutines(result);
             })
             .catch(console.error);
         }
@@ -50,9 +76,14 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
                 </Link>
             </div>
                 </>
-            }else if (userRoutines){
+            }else if (userRoutines[0]){
                 return <>
                 <div className='routineContainer'>
+                <Link to='/newroutine'> 
+                    <button type="button">
+                       New Routine 
+                    </button>
+                </Link>  
                 <div className='routineList'>
                 {userRoutines.map(routine => <div className="routineItem" key = {routine.id}>
                     <h3>{routine.name}</h3>
@@ -60,16 +91,16 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
                     <div>Goal: {routine.goal}</div>
                     {/* CHANGE LINK TO EDIT POPUP */}
                     <div className="editDeleteButtons">
-                    <Link to='/login'> 
+                    <Link to='/updateroutine'> 
                         <button type="button" onClick={()=> {setRoutineId(routine.id)}}>
                             Edit Routine
                         </button>
                     </Link>
-                    <Link to='/login'>
-                        <button type='button' onClick={()=> {setRoutineId(routine.id)}}>
-                            Delete Routine
-                        </button>
-                    </Link>
+                    
+                    <button type='button' onClick={()=> {handleDeleteRoutine(routine.id)}}>
+                        Delete Routine
+                    </button>
+                    
                     <Link to='/addactivity'>
                         <button type='button' onClick={()=> {setRoutineId(routine.id)}}>
                             Add Activities
@@ -84,16 +115,18 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
                                 <p>Duration: {activity.duration}</p>
                                 <p>Count: {activity.count}</p>
                                 <div className="editDeleteButtons">
-                                <Link to='/login'> 
+                                <Link to='/updateroutineactivity'> 
                                 <button type="button" onClick={()=> {setRoutineId(routine.id)}}>
                                     Edit Activity
                                 </button>
                                 </Link>
-                                <Link to='/login'>
-                                <button type='button' onClick={()=> {setRoutineId(routine.id)}}>
+                                
+                                <button type='button' onClick={()=> {
+                                    console.log('activity:',activity);
+                                    handleDeleteRoutineActivity(activity.routineActivityId)}}>
                                     Delete Activity
                                 </button>
-                                </Link>
+        
                                 </div>
                                 </div>
                                 )}
@@ -107,7 +140,7 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
             }else {
                 return <>
                 <h1>No Routines? Create One:</h1>
-                <Link to='/signup'> 
+                <Link to='/newroutine'> 
                     <button type="button">
                        New Routine 
                     </button>
