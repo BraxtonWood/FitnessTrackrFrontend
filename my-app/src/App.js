@@ -35,7 +35,7 @@ function App() {
         <Route path="/myroutines" element={ <MyRoutines username={username} token={token}/>}/>
         <Route path="/mymessages" element={<MessageUser currentUsername={currentUsername} userMessage={userMessage}/>}/>
         <Route path="/newactivity" element={ <NewActivity setUserMessage={setUserMessage}/> } />
-        <Route path="/addactivity" element={ <AddActivity/> } />
+        <Route path="/addactivity" element={ <AddActivity setUserMessage={setUserMessage} /> } />
       </Routes>
     </div>
   );
