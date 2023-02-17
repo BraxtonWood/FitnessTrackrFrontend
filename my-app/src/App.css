@@ -60,7 +60,23 @@ body {
 .userControlsWelcome {
   color: #4a4f5f;
 }
-.userControlsLoginLink{
+.userControlsLoginLinkLeft{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.userControlsLoginLinkRight{
   background-color:#67aacb;
   border: 1px solid #62a1c1;
   color: #ecf9fb;
@@ -103,6 +119,13 @@ body {
 label{
   font-size: small;
   color: #4a4f5f;
+}
+.selectActivity{
+    margin-bottom: 20px;
+  width: 207px;
+  border: 1px solid #67aacb;
+  background-color: #ebf0f3;
+  height: 25px;
 }
 .logIn_signUp_create_edit_entry{
   margin-bottom: 20px;

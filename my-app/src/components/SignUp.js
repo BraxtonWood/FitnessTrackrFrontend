@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function SignUp({username, setUsername, password, setPassword, setCurrentUsername, setToken, currentUsername}) {
+function SignUp({username, setUsername, password, setPassword, setCurrentUsername, setToken}) {
     const [email, setEmail] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("");
     let navigate = useNavigate()
@@ -31,8 +31,8 @@ function SignUp({username, setUsername, password, setPassword, setCurrentUsernam
                     setUsername("")
                     setPassword("")
                     navigate("/profile")
-                    setToken(result.token)
-                    setCurrentUsername(username)
+                    setToken(window.localStorage.setItem("token", result.token))
+                    setCurrentUsername(window.localStorage.setItem("username", result.user.username))
                 } else {
                     alert("Username is already in use. Sign in or use another username") 
                     setCurrentUsername(username)

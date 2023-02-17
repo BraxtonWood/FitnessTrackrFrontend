@@ -18,7 +18,7 @@ function NewActivity({token, setUserMessage}) {
             },
             body: JSON.stringify(
                 {
-                  name: name,
+                  name: name.trim(),
                   description: description,
                 }
             )
