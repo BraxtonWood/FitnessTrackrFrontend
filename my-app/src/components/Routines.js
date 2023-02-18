@@ -25,6 +25,7 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
           .then(result => {
             console.log("result", result);
             setPublicRoutines(result);
+            setDisplayRoutines(result);
           })
           .catch(console.error);
     }
@@ -44,25 +45,25 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
         }
     }
 
-    const searchAndDisplay = (event) =>{
+    const searchAndDisplay = async (event) =>{
+        console.log("searchAndDisplay");
         if(event){
             event.preventDefault();
         }
         
         setDisplayRoutines(publicRoutines.filter(routine => postMatches(routine, searchTerm)))
     }
-    const searchUserOnclick = async (creatorName) =>{
-        console.log("searchUser", creatorName);
-        setSearchTerm(creatorName);
-        
-        
-        searchAndDisplay();
+    // const searchUserOnclick = async () =>{
+    //     console.log("searchUser");
+    //     //setSearchTerm(creatorName);
+    //     searchAndDisplay();
 
-    }
+    // }
    useEffect(() => {
         getRoutines();
         searchAndDisplay();
-    },[]);
+        //searchUserOnclick()
+    }, []);
 
     const renderHelper = () => {
         //getRoutines()
@@ -73,7 +74,7 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
         // }
         if(token){
             return <>
-                    <h2>Head to My Routines to Create Your Own!</h2>
+                    <h4>Head to My Routines to Create Your Own!</h4>
                     <Link to='/myroutines'> 
                         <button type="button" className="submitButton">
                             My Routines
@@ -83,7 +84,8 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
                     {displayRoutines.map(routines => <div className="routineItem" key = {routines.id}>
                         <h3>{routines.name}</h3>
                         <a onClick={()=>{
-                            searchUserOnclick(routines.creatorName);  
+                            setSearchTerm(routines.creatorName);
+                            searchAndDisplay();  
                            }}>Created By:{routines.creatorName}</a>
                         <div>Goal:{routines.goal}</div>
                         <h4>Activities:</h4>

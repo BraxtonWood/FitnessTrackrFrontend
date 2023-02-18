@@ -56,7 +56,7 @@ function App() {
 
         {/* // *Update form Routes */}
           <Route path="/updateroutine" element={<UpdateRoutine  setSuccessStatus={setSuccessStatus} userRoutines={userRoutines} setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} token={token}/> } />
-          <Route path="/updateactivity" element={<UpdateActivity/> }/>
+          {/* <Route path="/updateactivity" element={<UpdateActivity/> }/> */}
           <Route path="/updateroutineactivity" element={<UpdateRoutineActivity setRoutineActivityId={setRoutineActivityId} routineActivityId={routineActivityId} token={token}/> }/> 
 
         {/* // *User Messages Routes */}
