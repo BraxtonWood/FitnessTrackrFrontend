@@ -55,18 +55,18 @@ function App() {
           <Route path="/myroutines" element={<MyRoutines userRoutines={userRoutines} routineActivityId={setRoutineActivityId} setRoutineActivityId={setRoutineActivityId} setUserRoutines={setUserRoutines} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId} setRoutineName={setRoutineName} routineDescription={routineGoal} setRoutineGoal={setRoutineGoal} setRoutineActivityCount={setRoutineActivityCount} setRoutineActivityDuration={setRoutineActivityDuration}/>}/>
 
         {/* // *User form Routes */}
-          <Route path="/login" element={<Login username={username} setSuccessStatus={setSuccessStatus}  setUsername={setUsername} password={password} setPassword={setPassword} token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />} />
+          <Route path="/login" element={<Login username={username} setSuccessStatus={setSuccessStatus}  setUsername={setUsername} password={password} setPassword={setPassword} token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} setUserMessage={setUserMessage} />} />
           <Route path="/signup" element={<SignUp username={username} setSuccessStatus={setSuccessStatus}  setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUsername={setCurrentUsername} setToken={setToken} setUserMessage={setUserMessage} />} />
 
         {/* // *Create form Routes */}
-          <Route path="/newactivity" element={<NewActivity setUserMessage={setUserMessage}/> } />
+          <Route path="/newactivity" element={<NewActivity setUserMessage={setUserMessage} setSuccessStatus={setSuccessStatus} /> } />
           <Route path="/newroutine" element={<NewRoutine setSuccessStatus={setSuccessStatus} token={token} setUserMessage={setUserMessage} setToken={setToken} /> } />
-          <Route path="/addactivity" element={<AddActivity setActivities={setActivities} activities={activities} setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} /> } />
+          <Route path="/addactivity" element={<AddActivity setActivities={setActivities} activities={activities} setUserMessage={setUserMessage} setSuccessStatus={setSuccessStatus} routineId={routineId} setRoutineId={setRoutineId} /> } />
 
         {/* // *Update form Routes */}
           <Route path="/updateroutine" element={<UpdateRoutine  setSuccessStatus={setSuccessStatus} userRoutines={userRoutines} setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} token={token} routineName={routineName} routineGoal={routineGoal} /> } />
-          {/* <Route path="/updateactivity" element={<UpdateActivity setActivityId={setActivityId} activityId={activityId} setUserMessage={setUserMessage}  activityName={activityName} activityDescription={activityDescription} />}/> */}
-          <Route path="/updateroutineactivity" element={<UpdateRoutineActivity setRoutineActivityId={setRoutineActivityId} routineActivityId={routineActivityId} token={token} routineActivityCount={routineActivityCount} routineActivityDuration={routineActivityDuration}/> }/> 
+          <Route path="/updateactivity" element={<UpdateActivity setActivityId={setActivityId} activityId={activityId} setUserMessage={setUserMessage} setSuccessStatus={setSuccessStatus}  activityName={activityName} activityDescription={activityDescription} />}/>
+          <Route path="/updateroutineactivity" element={<UpdateRoutineActivity setRoutineActivityId={setRoutineActivityId} setUserMessage={setUserMessage} setSuccessStatus={setSuccessStatus}  routineActivityId={routineActivityId} token={token} routineActivityCount={routineActivityCount} routineActivityDuration={routineActivityDuration}/> }/> 
 
         {/* // *User Messages Routes */}
           <Route path="/mymessages" element={<MessageUser successStatus={successStatus} currentUsername={currentUsername} userMessage={userMessage}/>}/>

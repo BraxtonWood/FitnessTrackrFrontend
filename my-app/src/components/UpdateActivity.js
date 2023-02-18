@@ -42,7 +42,7 @@ function NewActivity({setUserMessage, activityId, activityName, activityDescript
 
   return (
     <div className="logIn_signUp_create_edit_container">
-        <h1 className="pageTitle">Update activity </h1>
+        <h1 className="pageTitle">Edit activity </h1>
         <form onSubmit={handleSubmit} className="form">
             <label>Name</label><br/>
             <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={activityName} onSubmit={(event) => setName(event.target.value)} onChange={(event) => setName(event.target.value)} required/><br/>
