@@ -1,12 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 
-const Activities = ({token, activities, setActivities}) => {
+
+const Activities = ({token, activities, setActivities, setActivityId, setActivityDescription, setActivityName, searchTerm, setSearchTerm}) => {
+    //const[searchTerm, setSearchTerm] = useState('');
+    const[displayActivities, setDisplayActivities] = useState(activities);
     const getActivities = () => {
+        
+
         console.log("getActivities called");
-        //'http://fitnesstrac-kr.herokuapp.com/api/activities'
-        //'https://fitness-tracker-backend.onrender.com/api/activities'
+        console.log(token)
         fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
           headers: {
             'Content-Type': 'application/json',
@@ -18,52 +23,117 @@ const Activities = ({token, activities, setActivities}) => {
           })
           .catch(console.error);
     }
+    const postMatches = (activity, searchTerm) =>{
+        if(searchTerm === ""){
+            return activity
+        }
+        else if((activity.name.toLowerCase()).includes(searchTerm.toLowerCase())){
+            return activity
+        }
+        else if((activity.description.toLowerCase()).includes(searchTerm.toLowerCase())){
+            return activity
+        }
+        
+    }
+
+    const searchAndDisplay = (event) =>{
+        if(event){
+        event.preventDefault();
+        }
+        //console.log("event", event);
+        setDisplayActivities(activities.filter(activity => postMatches(activity, searchTerm)))
+    }
+    const searchUserOnclick = async (creatorName) =>{
+        console.log("searchUser");
+        setSearchTerm(creatorName);
+        searchAndDisplay();
+
+    }
+
+
+
+
+
+
    useEffect(() => {
         getActivities();
-    }, []);
+        searchAndDisplay();
+    },[]);
     
-    const renderHelper = () => {
-        if(token){
-            return <>
-                <Link to='/newactivity'> 
-                        <button type="button">
-                            Create New Activity
-                        </button>
-                </Link>
-         
-        </> 
-        } else {
-            return <>
-                <h2>Log in or Sign Up To Create Your Own Activities</h2>
-                <Link to='/signup'> 
-                    <button type="button">
-                        Sign In
-                    </button>
-                </Link>
-                <Link to='/login'>
-                    <button type="button">
-                        Log In
-                    </button>
-                </Link>
+    const activitiesRenderHelper = () => {
+        console.log("displayactivities:",displayActivities)
+        if(displayActivities === []){
+        return <>
+            <div className="mainBodyContainer">
+                    {(token) && <Link to='/newactivity'> Create New Activity</Link>}
+                    {(!token) && <>
+                        <h3>Log in or Sign Up To Create Your Own Activities</h3>
+                    </>}
+                    <div className='mainActivitiesContainer'>
+                        <form className='searchBarContainer' onSubmit={searchAndDisplay}>
+                        <input type="text" className='searchBar' placeholder="Search" value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}></input>
+                        <button type="submit" className="searchBarButtons">Search</button>
+                        <button type="submit" className="searchBarButtons" onClick={()=>{
+                        setSearchTerm('');
+                        setDisplayActivities(activities);
+                        }}>Clear</button>
+                        </form>
+                        {activities.map(activity => 
+                            <div className="activityContainer" key = {activity.id}>
+                                <a onClick={()=>{setSearchTerm(activity.id);
+                                }} className='activitiesFromActivitiesTitle'><Link to='/routines'>{activity.name}</Link>
+                                </a>
+                                <p>Description: {activity.description}</p> 
+                                {(token) && <Link to='/updateActivity'> 
+                                <button className="edit_add_buttons" type="button" onClick={()=> {
+                                    setActivityId(activity.id); 
+                                    setActivityName(activity.name); 
+                                    setActivityDescription(activity.description)}}>
+                                    Edit Activity
+                                </button>       
+                                </Link>}          
+                            </div>)
+                        }   
+                    </div>  
+                </div>
             
             </>
-
-        }
-    }
-    const activitiesRenderHelper = () => {
-        console.log("activities:",activities)
-        if(!activities){
-        return <>
-            <p>Loading Activites....</p>
-        </>
         } else {
             return <>
-                {activities.map(activity => 
-                    <div className="activityItem" key = {activity.id}>
-                        <h3>{activity.name}</h3>
-                        <p>Name: {activity.goal}</p>
-                        <p>Description: {activity.description}</p>                   
-                    </div>)}
+                <div className="mainBodyContainer">
+                    {(token) && <Link to='/newactivity'> Create New Activity</Link>}
+                    {(!token) && <>
+                        <h3>Log in or Sign Up To Create Your Own Activities</h3>
+                    </>}
+                    <div className='mainActivitiesContainer'>
+                        <form className='searchBarContainer' onSubmit={searchAndDisplay}>
+                        <input type="text" className='searchBar' placeholder="Search" value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}></input>
+                        <button type="submit" className="searchBarButtons">Search</button>
+                        <button type="submit" className="searchBarButtons" onClick={()=>{
+                        setSearchTerm('');
+                        setDisplayActivities(activities);
+                        }}>Clear</button>
+                        </form>
+                        {displayActivities.map(activity => 
+                            <div className="activityContainer" key = {activity.id}>
+                                <a onClick={()=>{setSearchTerm(activity.id);
+                                }} className='activitiesFromActivitiesTitle'><Link to='/routines'>{activity.name}</Link>
+                                </a>
+                                <p>Description: {activity.description}</p> 
+                                {(token) && <Link to='/updateActivity'> 
+                                <button className="edit_add_buttons" type="button" onClick={()=> {
+                                    setActivityId(activity.id); 
+                                    setActivityName(activity.name); 
+                                    setActivityDescription(activity.description)}}>
+                                    Edit Activity
+                                </button>       
+                                </Link>}          
+                            </div>)
+                        }   
+                    </div>  
+                </div>
             </>
         }
     }
@@ -71,23 +141,12 @@ const Activities = ({token, activities, setActivities}) => {
     
     return(<>
         
-        <div className='routineHeader'>
-            <h1 className='routineTitle'>All Activities:</h1>
+        <div className='mainBodyContainer'>
+            <h1 className='pageTitle'>Activities</h1>
             </div>
-        <div className='userHelperHeader'>{renderHelper()}
-            </div>
-        <div className='activityContainer'>  
+        <div>  
             {activitiesRenderHelper()}
-            {/* {activities.map(activity => 
-                <div className="activity" key = {activity.id}>
-                    <h3>{activity.name}</h3>
-                    <p>Name: {activity.goal}</p>
-                    <p>Description: {activity.description}</p>                   
-                </div>)} */}
             </div>
-        
-       
-            
         </>
     );
 }

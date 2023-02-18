@@ -3,12 +3,9 @@ import {Link} from 'react-router-dom';
 
 const Home = () => {
     return(
-        <div className="nav">
-        <h1>Home Page</h1>
-        
-        <Link to="/user" className='nav-item'>User</Link>
-        <Link to="/activities" className='nav-item'>Activities</Link>
-        <Link to="/routines" className='nav-item'>Routines</Link>
+        <div className="mainBodyContainer">
+        <h1 className='pageTitle' >Welcome to the future of Fitness</h1>
+        <h3>Be sure the check out the tabs above to get ideas for your fitness journey</h3>
         </div>
     );
 }

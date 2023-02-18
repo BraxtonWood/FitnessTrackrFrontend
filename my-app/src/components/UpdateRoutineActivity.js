@@ -4,9 +4,9 @@
    // import {getAllActivities} from "../api"
    
    
-   function UpdateRoutineActivity({setUserMessage, userMessage, routineActivityId, setRoutineActivityId, activities, token}) {
-      const [count, setCount]= useState("")
-      const [duration, setDuration]= useState("")
+   function UpdateRoutineActivity({setUserMessage, userMessage, routineActivityId, token, routineActivityCount, routineActivityDuration }) {
+      const [count, setCount]= useState()
+      const [duration, setDuration]= useState()
    
       let navigate = useNavigate();
    
@@ -49,10 +49,10 @@
        <div className="logIn_signUp_create_edit_container">
            <h1 className="pageTitle">Update Routine Activity </h1>
            <form onSubmit={handleSubmit} className="form">
-               <label>Count</label><br/>
-               <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setCount(event.target.value)} required/><br/>
                <label>Duration</label><br/>
-               <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setDuration(event.target.value)} required/><br/>
+               <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineActivityDuration} onChange={(event) => setDuration(event.target.value)} onSubmit={(event) => setDuration(event.target.value)}  required/><br/>
+               <label>Count</label><br/>
+               <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineActivityCount} onChange={(event) => setCount(event.target.value)} onSubmit={(event) => setCount(event.target.value)} required/><br/>
                <input className="submitButton" type="submit" value='Submit'></input>
            </form>
        </div>
