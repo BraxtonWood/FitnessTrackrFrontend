@@ -1,12 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
-//import {Routes, Route} from 'react-router-dom';
-//import Home from "./Home";
-//import User from "./User";
-//import Routines from "./Routines";
-//import Activities from "./Activities";
-//import Header from "./Header";
-
 
 const Routines = ({token, publicRoutines, setPublicRoutines}) => {
     const[searchTerm, setSearchTerm] = useState('');
@@ -15,8 +8,6 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
 
     const getRoutines = () => {
         console.log("getRoutines called");
-        //'http://fitnesstrac-kr.herokuapp.com/api/routines'
-        //'https://fitness-tracker-backend.onrender.com/api/routines'
         fetch('https://fitness-tracker-backend.onrender.com/api/routines', {
           headers: {
             'Content-Type': 'application/json',
@@ -65,12 +56,6 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
     },[]);
 
     const renderHelper = () => {
-        //getRoutines()
-        // if(publicRoutines=[]){
-        //     return <>
-        //     <h4>...Loading</h4>
-        //     </>
-        // }
         if(token){
             return <>
                     <h2>Head to My Routines to Create Your Own!</h2>
@@ -134,14 +119,13 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
                                 )}
 
             </div>
+
             </>
         }
     }
     
     return(
-
         <>
-
         <div className='routineHeader'>
                 <h1 className='routineTitle'>Public Routines:</h1>
             </div>
@@ -160,16 +144,8 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
      
         </div> */}
         <div>
+
             {renderHelper()}
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        
         </>
     );
 }

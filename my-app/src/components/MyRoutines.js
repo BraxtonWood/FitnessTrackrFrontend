@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
 
-function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUserRoutines, setRoutineActivityId}){
+function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUserRoutines, setRoutineActivityId, setRoutineName, setRoutineGoal, setRoutineActivityCount, setRoutineActivityDuration }){
     console.log("token:",token);
     
     const handleDeleteRoutine = async (routineId) => {
@@ -59,11 +59,11 @@ function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUser
             if(!token){
                 return <>
                 <div className='mainBodyContainer'>
-                <h1 className='routineTitle'>My Routines</h1>
+                <h1 className='PageTitle'>My Routines</h1>
                 <h2>Log in or Sign Up To View Personal Routines</h2>
                 <div className="linkContainer">
-                <Link className="userControlsLoginLinkLeft" to='/signup'>Sign In</Link>
-                <Link className="userControlsLoginLinkRight" to='/login'>Log In</Link>
+                <Link className="userControlsLoginLinkLeft" to='/signup'>Sign Up</Link>
+                <Link className="userControlsLoginLinkLeft" to='/login'>Log In</Link>
                 </div>
             </div>
                 </>
@@ -71,19 +71,21 @@ function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUser
                 return <>
                 <div className='mainBodyContainer'>
                 <h1 className="pageTitle">My Routines</h1>
-                <Link className="newRoutineLink" to="/newroutine">Add a new Routine</Link>
-                <div className=''>
+                <Link to="/newroutine">Add a new Routine</Link>
                 {userRoutines.map(routine => <div className="routinesContainer" key = {routine.id}>
                     <h2 className="routineTitle">{routine.name}</h2>
                     <div className="routineGoal" >Goal: {routine.goal}</div>
-                    {(routine.isPublic) && <div className="routineInfo">Public routine</div>}
-                    {(!routine.isPublic) && <div className="routineInfo">Private routine</div>}
+                    {(routine.isPublic) && <div className="routineInfoAndActivityDescription">Public routine</div>}
+                    {(!routine.isPublic) && <div className="routineInfoAndActivityDescription">Private routine</div>}
 
                     {/* CHANGE LINK TO EDIT POPUP */}
                     <div className="editDeleteButtons">
                     <Link to='/updateroutine'> 
-                        <button className="edit_add_buttons" type="button" onClick={()=> {setRoutineId(routine.id)}}>
-                            Edit Routine
+                        <button className="edit_add_buttons" type="button" onClick={()=> {
+                                setRoutineId(routine.id); 
+                                setRoutineName(routine.name); 
+                                setRoutineGoal(routine.goal)}
+                            }>Edit Routine
                         </button>
                     </Link>
                     <Link to='/addactivity'>
@@ -106,7 +108,11 @@ function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUser
                                 <p className="activityInfo">Count: {activity.count}</p>
                                 <div className="editDeleteButtons">
                                 <Link to='/updateroutineactivity'> 
-                                <button className="edit_add_buttons" type="button" onClick={()=> {setRoutineActivityId(activity.routineActivityId)}}>
+                                <button className="edit_add_buttons" type="button" onClick={()=> {
+                                    setRoutineActivityId(activity.routineActivityId);                                    
+                                    setRoutineActivityCount(activity.count);
+                                    setRoutineActivityDuration(activity.duration)
+                                }}>
                                     Edit Activity
                                 </button>
                                 </Link>
@@ -123,7 +129,6 @@ function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUser
                         </div>
                             )}
 
-                </div>
                 </div>
                 </>
             }else {
