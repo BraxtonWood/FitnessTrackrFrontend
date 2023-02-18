@@ -16,6 +16,7 @@ import UpdateActivity from './components/UpdateActivity'
 import UpdateRoutineActivity from './components/UpdateRoutineActivity'
 import MessageUser from './components/MessageUser';
 
+
 function App() {
   
   const [username, setUsername] = useState("");
@@ -36,6 +37,8 @@ function App() {
   const [routineName, setRoutineName] = useState();
   const [routineActivityCount, setRoutineActivityCount] = useState();
   const [routineActivityDuration, setRoutineActivityDuration] = useState();
+  const[displayRoutines, setDisplayRoutines] = useState(publicRoutines);
+  const [searchTerm, setSearchTerm] = useState('')
 
    return (
 
@@ -47,8 +50,8 @@ function App() {
           <Route path="/" element={ <Home/> } />
  
         {/* // *Main page Routes */}
-          <Route path="/routines" element={<Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  /> } />
-          <Route path="/activities" element={<Activities activities={activities} setActivities={setActivities} token={token} setActivityId={setActivityId} setActivityDescription={setActivityDescription} setActivityName={setActivityName} /> } />
+          <Route path="/routines" element={<Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  displayRoutines={displayRoutines} setDisplayRoutines={setDisplayRoutines} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> } />
+          <Route path="/activities" element={<Activities activities={activities} setActivities={setActivities} token={token} setActivityId={setActivityId} setActivityDescription={setActivityDescription} setActivityName={setActivityName} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> } />
           <Route path="/myroutines" element={<MyRoutines userRoutines={userRoutines} routineActivityId={setRoutineActivityId} setRoutineActivityId={setRoutineActivityId} setUserRoutines={setUserRoutines} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId} setRoutineName={setRoutineName} routineDescription={routineGoal} setRoutineGoal={setRoutineGoal} setRoutineActivityCount={setRoutineActivityCount} setRoutineActivityDuration={setRoutineActivityDuration}/>}/>
 
         {/* // *User form Routes */}
@@ -68,6 +71,7 @@ function App() {
         {/* // *User Messages Routes */}
           <Route path="/mymessages" element={<MessageUser successStatus={successStatus} currentUsername={currentUsername} userMessage={userMessage}/>}/>
 
+        
       </Routes>
     </div>
   );

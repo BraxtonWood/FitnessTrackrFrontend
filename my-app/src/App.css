@@ -192,14 +192,40 @@ label{
   border-radius: 5px;
 }
 .searchBarContainer{
+  position: fixed;
+  bottom: 0;
   display: flex;
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.2);
+  background-color: #ecf9fb;
+
 }
 .searchBar{
-  margin-bottom: 20px;
-  width: 200px;
+  margin-top: 20px;
+  width: 300px;
   border: 1px solid #67aacb;
   background-color: #ebf0f3;
   height: 30px;
+}
+.searchBarButtons{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: auto;
+  font-weight: 300;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
 }
 
 /* * MyRoutines, Routines & Activities Styles * */

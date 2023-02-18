@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 
-const Activities = ({token, activities, setActivities, setActivityId, setActivityDescription, setActivityName}) => {
-    
+
+const Activities = ({token, activities, setActivities, setActivityId, setActivityDescription, setActivityName, searchTerm, setSearchTerm}) => {
+    //const[searchTerm, setSearchTerm] = useState('');
+    const[displayActivities, setDisplayActivities] = useState(activities);
     const getActivities = () => {
         
 
@@ -21,16 +23,82 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
           })
           .catch(console.error);
     }
+    const postMatches = (activity, searchTerm) =>{
+        if(searchTerm === ""){
+            return activity
+        }
+        else if((activity.name.toLowerCase()).includes(searchTerm.toLowerCase())){
+            return activity
+        }
+        else if((activity.description.toLowerCase()).includes(searchTerm.toLowerCase())){
+            return activity
+        }
+        
+    }
+
+    const searchAndDisplay = (event) =>{
+        if(event){
+        event.preventDefault();
+        }
+        //console.log("event", event);
+        setDisplayActivities(activities.filter(activity => postMatches(activity, searchTerm)))
+    }
+    const searchUserOnclick = async (creatorName) =>{
+        console.log("searchUser");
+        setSearchTerm(creatorName);
+        searchAndDisplay();
+
+    }
+
+
+
+
+
+
    useEffect(() => {
         getActivities();
+        searchAndDisplay();
     },[]);
     
     const activitiesRenderHelper = () => {
-        console.log("activities:",activities)
-        if(!activities){
+        console.log("displayactivities:",displayActivities)
+        if(displayActivities === []){
         return <>
-            <p>Loading Activities....</p>
-        </>
+            <div className="mainBodyContainer">
+                    {(token) && <Link to='/newactivity'> Create New Activity</Link>}
+                    {(!token) && <>
+                        <h3>Log in or Sign Up To Create Your Own Activities</h3>
+                    </>}
+                    <div className='mainActivitiesContainer'>
+                        <form className='searchBarContainer' onSubmit={searchAndDisplay}>
+                        <input type="text" className='searchBar' placeholder="Search" value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}></input>
+                        <button type="submit" className="searchBarButtons">Search</button>
+                        <button type="submit" className="searchBarButtons" onClick={()=>{
+                        setSearchTerm('');
+                        setDisplayActivities(activities);
+                        }}>Clear</button>
+                        </form>
+                        {activities.map(activity => 
+                            <div className="activityContainer" key = {activity.id}>
+                                <a onClick={()=>{setSearchTerm(activity.id);
+                                }} className='activitiesFromActivitiesTitle'><Link to='/routines'>{activity.name}</Link>
+                                </a>
+                                <p>Description: {activity.description}</p> 
+                                {(token) && <Link to='/updateActivity'> 
+                                <button className="edit_add_buttons" type="button" onClick={()=> {
+                                    setActivityId(activity.id); 
+                                    setActivityName(activity.name); 
+                                    setActivityDescription(activity.description)}}>
+                                    Edit Activity
+                                </button>       
+                                </Link>}          
+                            </div>)
+                        }   
+                    </div>  
+                </div>
+            
+            </>
         } else {
             return <>
                 <div className="mainBodyContainer">
@@ -39,9 +107,20 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
                         <h3>Log in or Sign Up To Create Your Own Activities</h3>
                     </>}
                     <div className='mainActivitiesContainer'>
-                        {activities.map(activity => 
+                        <form className='searchBarContainer' onSubmit={searchAndDisplay}>
+                        <input type="text" className='searchBar' placeholder="Search" value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}></input>
+                        <button type="submit" className="searchBarButtons">Search</button>
+                        <button type="submit" className="searchBarButtons" onClick={()=>{
+                        setSearchTerm('');
+                        setDisplayActivities(activities);
+                        }}>Clear</button>
+                        </form>
+                        {displayActivities.map(activity => 
                             <div className="activityContainer" key = {activity.id}>
-                                <h3 className='activitiesFromActivitiesTitle'>{activity.name}</h3>
+                                <a onClick={()=>{setSearchTerm(activity.id);
+                                }} className='activitiesFromActivitiesTitle'><Link to='/routines'>{activity.name}</Link>
+                                </a>
                                 <p>Description: {activity.description}</p> 
                                 {(token) && <Link to='/updateActivity'> 
                                 <button className="edit_add_buttons" type="button" onClick={()=> {
