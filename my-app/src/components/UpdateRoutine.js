@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {Link} from 'react-router-dom';
+
 
 
 function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage, routineGoal, routineName}) {
     const [name, setName]= useState()
     const [goal, setGoal]= useState()
+
     const [isPublic, setIsPublic] = useState(false)
     let navigate = useNavigate();
 
@@ -52,7 +55,11 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
                 <input type="checkbox" onChange={(event) => setIsPublic(true)}/><br/>
                 <label>Is this a public routine?</label>
             </div>
-            <input className="submitButton" type="submit" value='Submit'></input>
+            
+            <Link to='/myroutines'>
+                <input className="submitButton" type="submit" value='Submit'></input>
+            </Link>
+            
         </form>
     </div>
   );
