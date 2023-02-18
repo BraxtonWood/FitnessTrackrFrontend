@@ -15,7 +15,8 @@ function MessageUser ({currentUsername, userMessage, successStatus}) {
   
   return (
     <div className="logIn_signUp_create_edit_container">
-        <h1 className="pageTitle">Hello {currentUsername}</h1>
+        {(!successStatus) && <h1 className="pageTitle">Oh no...</h1>}
+        {(successStatus) && <h1 className="pageTitle">Success!!</h1>}
         <p className="pageMessage">{userMessage}</p>
     </div>
   );

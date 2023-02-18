@@ -88,7 +88,7 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
                         
                         
                         <div className='routineInfoAndActivityDescription' >Goal: {routines.goal}</div>
-                            <h4 className="publicRoutinesActivitiesTitle">Activities</h4>
+                            <h3 className="publicRoutinesActivitiesTitle">Activities</h3>
                             <div>{routines.activities.map(activity => 
                                 <div className='activitiesContainer' key={activity.routineActivityId}>
                                     <h4 className="activityTitle">{activity.name}</h4>
