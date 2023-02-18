@@ -1,10 +1,16 @@
 {
     "cSpell.words": [
+        "Activityid",
+        "addactivity",
         "createroutine",
         "mymessages",
         "myroutines",
         "newactivity",
         "newroutine",
-        "Trac"
+        "onrender",
+        "Trac",
+        "updateactivity",
+        "updateroutineactivity",
+        "updatroutineactivity"
     ]
 }

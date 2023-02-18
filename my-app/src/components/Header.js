@@ -28,15 +28,15 @@ function Header({currentUsername, setCurrentUsername, setToken}) {
         </div>
         <div className="headerLinksContainer">
             <nav className="headerNavBarContainer">
-                <Link className="navBarLink" to="/">Home |</Link>
-                <Link className="navBarLink" to="/routines">All Routines |</Link>
-                <Link className="navBarLink" to="/activities">All Activities |</Link>
-                <Link className="navBarLink" to="/myroutines">My Routines </Link>
+                <Link className="navBarLink" to="/">Home  |</Link>
+                <Link className="navBarLink" to="/routines">Public Routines |</Link>
+                <Link className="navBarLink" to="/activities">Activities</Link>
+                {(currentUsername) && <Link className="navBarLink" to="/myroutines">| My Routines </Link>}
                 {/* // !these links are to be removed they are only for testing now */}
-                <Link className="navBarLink" to= "/newroutine">| Create a Routine </Link>
+                {/* <Link className="navBarLink" to= "/newroutine">| Create a Routine </Link>
                 <Link className="navBarLink" to= "/newactivity">| Create an Activity</Link>
                 <Link className="navBarLink" to= "/addactivity">| add an Activity</Link>
-                <Link className="navBarLink" to= "/updateroutine">| update routine </Link>
+                <Link className="navBarLink" to= "/updateroutine">| update routine </Link> */}
             </nav>
             {(currentUsername) &&
             <nav className="headerUserControlsContainer">
