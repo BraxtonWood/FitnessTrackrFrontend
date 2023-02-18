@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 
-const Activities = ({token, activities, setActivities}) => {
+const Activities = ({token, activities, setActivities, setActivityId, setActivityDescription, setActivityName}) => {
+    
     const getActivities = () => {
+        
+
         console.log("getActivities called");
-        //'http://fitnesstrac-kr.herokuapp.com/api/activities'
-        //'https://fitness-tracker-backend.onrender.com/api/activities'
+        console.log(token)
         fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
           headers: {
             'Content-Type': 'application/json',
@@ -20,50 +23,38 @@ const Activities = ({token, activities, setActivities}) => {
     }
    useEffect(() => {
         getActivities();
-    }, []);
+    },[]);
     
-    const renderHelper = () => {
-        if(token){
-            return <>
-                <Link to='/newactivity'> 
-                        <button type="button">
-                            Create New Activity
-                        </button>
-                </Link>
-         
-        </> 
-        } else {
-            return <>
-                <h2>Log in or Sign Up To Create Your Own Activities</h2>
-                <Link to='/signup'> 
-                    <button type="button">
-                        Sign In
-                    </button>
-                </Link>
-                <Link to='/login'>
-                    <button type="button">
-                        Log In
-                    </button>
-                </Link>
-            
-            </>
-
-        }
-    }
     const activitiesRenderHelper = () => {
         console.log("activities:",activities)
         if(!activities){
         return <>
-            <p>Loading Activites....</p>
+            <p>Loading Activities....</p>
         </>
         } else {
             return <>
-                {activities.map(activity => 
-                    <div className="activityItem" key = {activity.id}>
-                        <h3>{activity.name}</h3>
-                        <p>Name: {activity.goal}</p>
-                        <p>Description: {activity.description}</p>                   
-                    </div>)}
+                <div className="mainBodyContainer">
+                    {(token) && <Link to='/newactivity'> Create New Activity</Link>}
+                    {(!token) && <>
+                        <h3>Log in or Sign Up To Create Your Own Activities</h3>
+                    </>}
+                    <div className='mainActivitiesContainer'>
+                        {activities.map(activity => 
+                            <div className="activityContainer" key = {activity.id}>
+                                <h3 className='activitiesFromActivitiesTitle'>{activity.name}</h3>
+                                <p>Description: {activity.description}</p> 
+                                {(token) && <Link to='/updateActivity'> 
+                                <button className="edit_add_buttons" type="button" onClick={()=> {
+                                    setActivityId(activity.id); 
+                                    setActivityName(activity.name); 
+                                    setActivityDescription(activity.description)}}>
+                                    Edit Activity
+                                </button>       
+                                </Link>}          
+                            </div>)
+                        }   
+                    </div>  
+                </div>
             </>
         }
     }
@@ -71,23 +62,12 @@ const Activities = ({token, activities, setActivities}) => {
     
     return(<>
         
-        <div className='routineHeader'>
-            <h1 className='routineTitle'>All Activities:</h1>
+        <div className='mainBodyContainer'>
+            <h1 className='pageTitle'>Activities</h1>
             </div>
-        <div className='userHelperHeader'>{renderHelper()}
-            </div>
-        <div className='activityContainer'>  
+        <div>  
             {activitiesRenderHelper()}
-            {/* {activities.map(activity => 
-                <div className="activity" key = {activity.id}>
-                    <h3>{activity.name}</h3>
-                    <p>Name: {activity.goal}</p>
-                    <p>Description: {activity.description}</p>                   
-                </div>)} */}
             </div>
-        
-       
-            
         </>
     );
 }

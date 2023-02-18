@@ -41,7 +41,7 @@ function Header({currentUsername, setCurrentUsername, setToken}) {
             {(currentUsername) &&
             <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome {currentUsername}!</p>
-                <button className="userControlsLoginLinkRight" onClick={handleSubmit} >Log Out</button>
+                <button className="userControlsLoginLinkScrollBar" onClick={handleSubmit} >Log Out</button>
             </nav>}
             {(!currentUsername) &&
             <nav className="headerUserControlsContainer">

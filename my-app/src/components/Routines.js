@@ -1,19 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
-//import {Routes, Route} from 'react-router-dom';
-//import Home from "./Home";
-//import User from "./User";
-//import Routines from "./Routines";
-//import Activities from "./Activities";
-//import Header from "./Header";
-
 
 const Routines = ({token, publicRoutines, setPublicRoutines}) => {
     
     const getRoutines = () => {
         console.log("getRoutines called");
-        //'http://fitnesstrac-kr.herokuapp.com/api/routines'
-        //'https://fitness-tracker-backend.onrender.com/api/routines'
         fetch('https://fitness-tracker-backend.onrender.com/api/routines', {
           headers: {
             'Content-Type': 'application/json',
@@ -30,100 +21,55 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
     }, []);
 
     const renderHelper = () => {
-        //getRoutines()
-        // if(publicRoutines=[]){
-        //     return <>
-        //     <h4>...Loading</h4>
-        //     </>
-        // }
         if(token){
             return <>
-                    <h2>Head to My Routines to Create Your Own!</h2>
-                    <Link to='/myroutines'> 
-                        <button type="button">
-                            My Routines
-                        </button>
-                    </Link>
-                    <div className='routineList'>
-                    {publicRoutines.map(routines => <div className="routine" key = {routines.id}>
-                        <h3>{routines.name}</h3>
-                        <div>Created By:{routines.creatorName}</div>
-                        <div>Goal:{routines.goal}</div>
-                        <h4>Activities:</h4>
-                                <div>{routines.activities.map(activity => 
-                                    <div className='Activity' key={activity.routineActivityId}>
-                                        <h4>{activity.name}</h4>
-                                        <p>Description:{activity.description}</p>
-                                        <p>Duration:{activity.duration}</p>
-                                        <p>Count:{activity.count}</p>
-                                    </div>
-                                )}
-                                </div>
-                                </div>
-                                )}
-
-                </div> 
+                <div className='mainBodyContainer'>
+                    <h1 className='routineTitle'>Public Routines</h1>
+                    <h3>Head to My Routines to Create Your Own!</h3>
+                    {publicRoutines.map(routines => <div className="routinesContainer" key = {routines.id}>
+                        <h2 className="routineTitle" >{routines.name}</h2>
+                        <div className="routineGoal">Created By: {routines.creatorName}</div>
+                        <div className="routineInfoAndActivityDescription">Goal: {routines.goal}</div>
+                        <h3 className="publicRoutinesActivitiesTitle">Activities:</h3>
+                        <div>{routines.activities.map(activity => 
+                            <div className='activitiesContainer' key={activity.routineActivityId}>
+                                <h4 className="activityTitle">{activity.name}</h4>
+                                <p className="activityInfo">Description: {activity.description}</p>
+                                <p className="activityInfo">Duration: {activity.duration}</p>
+                                <p className="activityInfo">Count: {activity.count}</p>
+                            </div>
+                            )}</div>
+                    </div>)}
+                    
+                </div>
             </>
         } else {
             return <>
-                <h2>Log in or Sign Up To Create Your Own</h2>
-                <Link to='/signup'> 
-                    <button type="button">
-                        Sign In
-                    </button>
-                </Link>
-                <Link to='/login'>
-                    <button type="button">
-                        Log In
-                    </button>
-                </Link>
-            
-                <div className='routineContainer'>
-                    {publicRoutines.map(routines => <div className="routineItem" key = {routines.id}>
-                        <h3>{routines.name}</h3>
-                        <div>Created By:{routines.creatorName}</div>
-                        <div>Goal:{routines.goal}</div>
-                        <h4>Activities:</h4>
-                                <div>{routines.activities.map(activity => 
-                                    <div className='Activity' key={activity.routineActivityId}>
-                                        <h4>{activity.name}</h4>
-                                        <p>Description:{activity.description}</p>
-                                        <p>Duration:{activity.duration}</p>
-                                        <p>Count:{activity.count}</p>
-                                    </div>
-                                )}
-                                </div>
-                                </div>
-                                )}
-
-            </div>
+                <div className='mainBodyContainer'>
+                    <h1 className='routineTitle'>Public Routines</h1>
+                    <h3>Log in or Sign Up To Create Your Own</h3>
+                    {publicRoutines.map(routines => <div className="routinesContainer" key = {routines.id}>
+                        <h2 className="routineTitle" >{routines.name}</h2>
+                        <div className="routineGoal">Created By: {routines.creatorName}</div>
+                        <div className="routineInfoAndActivityDescription">Goal: {routines.goal}</div>
+                        <h3 className="publicRoutinesActivitiesTitle">Activities:</h3>
+                        <div>{routines.activities.map(activity => 
+                            <div className='activitiesContainer' key={activity.routineActivityId}>
+                                <h4 className="activityTitle">{activity.name}</h4>
+                                <p className="activityInfo">Description: {activity.description}</p>
+                                <p className="activityInfo">Duration: {activity.duration}</p>
+                                <p className="activityInfo">Count: {activity.count}</p>
+                            </div>
+                        )}</div>
+                    </div>)}
+                </div>
             </>
         }
     }
     
     return(
-
         <>
-
-        <div className='routineHeader'>
-                <h1 className='routineTitle'>Public Routines:</h1>
-            </div>
-        {/* <div className='header'>
-    
-        <Header className="App" element></Header>
-     
-        </div> */}
-        <div>
             {renderHelper()}
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        
         </>
     );
 }

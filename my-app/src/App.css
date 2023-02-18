@@ -1,24 +1,30 @@
+
 body {
+  width: 100%;
+  height: 100vh;
   display: flex;
   font-family:Arial, Helvetica, sans-serif ;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
   margin: 0;
+  padding-left: 0; padding-right: 0;
+  overflow-x: hidden
 }
 
 /* * Header Styles * */
 .header {
+  margin: 0px;
   display: flex;
   flex-direction: column;
   background-color: #9bd0ea;
-  height: 19vh;
+  height: 175px;
   width: 100vw;
+  margin: 0px;
   box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.1)
 }
 .headerTop{
+  margin: 0px;
   background-color :#67aacb;
-  width: 100vw;
+  height: 125px;
   box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.1);
 }
 .headerAboutContainer{
@@ -37,20 +43,20 @@ body {
   color:#ecf9fb;
 }
 .headerLinksContainer{
-  margin-right: 20px;
-  margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
+  width: 100%;
+
 }
 .headerNavBarContainer{
   display: flex;
+  margin-left: 20px;
 }
 .navBarLink {
   color: #4a4f5f;
   text-decoration: none;
-  font-size: 18px;
+  font-size: auto;
   padding-left: 4px;
   font-weight: 300;
 }
@@ -60,6 +66,8 @@ body {
 }
 .userControlsWelcome {
   color: #4a4f5f;
+  text-align: end;
+  font-size: auto;
 }
 .userControlsLoginLinkLeft{
   background-color:#67aacb;
@@ -72,7 +80,7 @@ body {
   display: flex;
   width: 75px;
   height: 32px;
-  font-size: 16px;
+  font-size: auto;
   font-weight: 300;
   margin-left: 10px;
   margin-right: 5px;
@@ -88,10 +96,26 @@ body {
   display: flex;
   width: 75px;
   height: 32px;
-  font-size: 16px;
+  font-size: auto;
   font-weight: 300;
   margin-left: 10px;
-  margin-right: 60px;
+  margin-right: 20px;
+}
+.userControlsLoginLinkScrollBar{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 30px;
 }
 
 /* * Form & Message Styles * */
@@ -165,22 +189,22 @@ label{
   border-radius: 5px;
 }
 
-/* * MyRoutines Styles * */
+/* * MyRoutines, Routines & Activities Styles * */
 .mainBodyContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
   color: #4a4f5f;
 }
-.mainRoutinesContainer{
+.mainActivitiesContainer{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.linkContainer{
-  display: flex;
-}
-.newRoutinesLink{
+.newRoutinesOrActivitiesLink{
   margin-top: 10px;
   margin-bottom: 20px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -199,9 +223,28 @@ label{
   border-radius: 5px;
   box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.2);
 }
+.activityContainer{
+  display: flex; 
+  flex-direction: column;
+  width: 300px;
+  height: auto;
+  color: dark;
+  /* justify-content: center; */
+  padding: 20px;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-left: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.2);
+}
 .routineTitle{
   color: #62a1c1;
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+.activitiesFromActivitiesTitle{
+  color: #62a1c1;
+  margin-top: 5px;
   margin-bottom: 0;
 }
 .routineGoal{
@@ -209,7 +252,7 @@ label{
   margin-bottom: 7px;
   font-weight: bold;
 }
-.routineInfo{
+.routineInfoAndActivityDescription{
   margin-top: 0px;
   margin-bottom: 10px;
   font-weight: bold;
@@ -223,6 +266,14 @@ label{
   font-weight: bold;
   margin-left: 25px;
 }
+.publicRoutinesActivitiesTitle{
+  margin-top: 7px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  margin-left: 25px;
+  color: #4d9d54;
+
+}
 .activityTitle{
   color: #548ba6;
   margin-top: 0px;
@@ -232,6 +283,9 @@ label{
   margin-top: 7px;
   margin-bottom: 7px;
   margin-left: 20px;
+}
+.editDeleteButtons{
+  display: flex;
 }
 .edit_add_buttons{
   display: flex;
@@ -264,60 +318,4 @@ label{
   font-size: 10px;
   font-weight: 200;
   border-radius: 5px;
-}
-
-.userHelperHeader {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-
-}
-
-
-
-.routineHeader {
-  padding:25px;
-  display:flex;
-  flex-direction: column;
-
-  
-  
-}
-.routineContainer {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  flex-grow: 1;
-  
-  /* width: 100%; */
-}
-.routineItem {
-  width: 28%;
-  margin: 5px;
-  
-  background-color: lightgrey;
-
-}
-.activityContainer {
-  padding:10px;
-  width:100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  
-}
-.activityItem {
-  width: 30%;
-  display:flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: lightgrey;
-  margin: 5px;
-}
-.editDeleteButtons {
-  display: flex;
-  flex-direction: row;
 }

@@ -25,11 +25,17 @@ function App() {
   const [publicRoutines, setPublicRoutines] = useState([]);
   const [userMessage, setUserMessage] = useState("");
   const [activities, setActivities] = useState([]);
-  const [routineId, setRoutineId] = useState('');
+  const [routineId, setRoutineId] = useState("");
   const [routineActivityId, setRoutineActivityId] = useState('');
   const [userRoutines, setUserRoutines] = useState([]);
-  const [successStatus, setSuccessStatus] = useState(true)
-
+  const [successStatus, setSuccessStatus] = useState(true);
+  const [activityId, setActivityId] = useState("");
+  const [activityDescription, setActivityDescription] = useState();
+  const [activityName, setActivityName] = useState();
+  const [routineGoal, setRoutineGoal] = useState()
+  const [routineName, setRoutineName] = useState();
+  const [routineActivityCount, setRoutineActivityCount] = useState();
+  const [routineActivityDuration, setRoutineActivityDuration] = useState();
 
    return (
 
@@ -42,8 +48,8 @@ function App() {
  
         {/* // *Main page Routes */}
           <Route path="/routines" element={<Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  /> } />
-          <Route path="/activities" element={<Activities activities={activities} setActivities={setActivities}/> } />
-          <Route path="/myroutines" element={<MyRoutines userRoutines={userRoutines} routineActivityId={setRoutineActivityId} setRoutineActivityId={setRoutineActivityId} setUserRoutines={setUserRoutines} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId}/>}/>
+          <Route path="/activities" element={<Activities activities={activities} setActivities={setActivities} token={token} setActivityId={setActivityId} setActivityDescription={setActivityDescription} setActivityName={setActivityName} /> } />
+          <Route path="/myroutines" element={<MyRoutines userRoutines={userRoutines} routineActivityId={setRoutineActivityId} setRoutineActivityId={setRoutineActivityId} setUserRoutines={setUserRoutines} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId} setRoutineName={setRoutineName} routineDescription={routineGoal} setRoutineGoal={setRoutineGoal} setRoutineActivityCount={setRoutineActivityCount} setRoutineActivityDuration={setRoutineActivityDuration}/>}/>
 
         {/* // *User form Routes */}
           <Route path="/login" element={<Login username={username} setSuccessStatus={setSuccessStatus}  setUsername={setUsername} password={password} setPassword={setPassword} token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />} />
@@ -55,9 +61,9 @@ function App() {
           <Route path="/addactivity" element={<AddActivity setActivities={setActivities} activities={activities} setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} /> } />
 
         {/* // *Update form Routes */}
-          <Route path="/updateroutine" element={<UpdateRoutine  setSuccessStatus={setSuccessStatus} userRoutines={userRoutines} setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} token={token}/> } />
-          <Route path="/updateactivity" element={<UpdateActivity/> }/>
-          <Route path="/updateroutineactivity" element={<UpdateRoutineActivity setRoutineActivityId={setRoutineActivityId} routineActivityId={routineActivityId} token={token}/> }/> 
+          <Route path="/updateroutine" element={<UpdateRoutine  setSuccessStatus={setSuccessStatus} userRoutines={userRoutines} setUserMessage={setUserMessage} userMessage={userMessage} routineId={routineId} setRoutineId={setRoutineId} token={token} routineName={routineName} routineGoal={routineGoal} /> } />
+          <Route path="/updateactivity" element={<UpdateActivity setActivityId={setActivityId} activityId={activityId} setUserMessage={setUserMessage}  activityName={activityName} activityDescription={activityDescription} />}/>
+          <Route path="/updateroutineactivity" element={<UpdateRoutineActivity setRoutineActivityId={setRoutineActivityId} routineActivityId={routineActivityId} token={token} routineActivityCount={routineActivityCount} routineActivityDuration={routineActivityDuration}/> }/> 
 
         {/* // *User Messages Routes */}
           <Route path="/mymessages" element={<MessageUser successStatus={successStatus} currentUsername={currentUsername} userMessage={userMessage}/>}/>

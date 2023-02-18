@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import {getAllActivities} from "../api"
 
 
-function AddActivity({setUserMessage, userMessage, routineId, setRoutineId, activities}) {
+
+function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
     const [count, setCount]= useState("")
     const [duration, setDuration]= useState("")
+    const [allActivities, setAllActivities] = useState([])
     const [singleActivity, setSingleActivity] = useState({})
     console.log(singleActivity)
+    console.log(allActivities)
+    console.log(routineId)
 
     let navigate = useNavigate();
 
+    useEffect(() => {  
+        fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(result => {
+            setAllActivities(result);
+        })
+        .catch(err=>console.error(err));
+
+    },[]);
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -37,11 +53,10 @@ function AddActivity({setUserMessage, userMessage, routineId, setRoutineId, acti
             .then(result => {
                 if (result.id) { 
                     console.log(result)
-                    setUserMessage("Your singleActivity was added")
+                    setUserMessage("")
                     setCount("");
                     setDuration("");
-                    //! I want to look at adding a set timeout to this
-                    navigate("/myroutines")
+                    navigate("/mymessages")
                     setUserMessage("")
                     setRoutineId("")
                 }
@@ -59,15 +74,15 @@ function AddActivity({setUserMessage, userMessage, routineId, setRoutineId, acti
             <label>Choose an Activity</label><br/>
             <select 
             className="selectActivity" 
-            onChange={(event)=>setSingleActivity(activities.filter((singleActivity) => singleActivity.name === event.target.value))}> 
+            onChange={(event)=>setSingleActivity(allActivities.filter((singleActivity) => singleActivity.name === event.target.value))}> 
                 <option></option>
-                {activities.map((singleActivity, index) =>
+                {allActivities.map((singleActivity, index) =>
                 <option key={ `${ index }:${ singleActivity.name }`}>{singleActivity.name}</option>)}
             </select><br/>
-            <label>Count</label><br/>
-            <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setCount(event.target.value)} required/><br/>
             <label>Duration</label><br/>
             <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setDuration(event.target.value)} required/><br/>
+            <label>Count</label><br/>
+            <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setCount(event.target.value)} required/><br/>
             <input className="submitButton" type="submit" value='Submit'></input>
         </form>
     </div>
