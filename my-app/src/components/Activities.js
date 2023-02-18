@@ -90,7 +90,7 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
                                     setActivityId(activity.id); 
                                     setActivityName(activity.name); 
                                     setActivityDescription(activity.description)}}>
-                                    Edit Activity
+                                    Edit Description
                                 </button>       
                                 </Link>}          
                             </div>)
@@ -127,7 +127,7 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
                                     setActivityId(activity.id); 
                                     setActivityName(activity.name); 
                                     setActivityDescription(activity.description)}}>
-                                    Edit Activity
+                                    Edit Description
                                 </button>       
                                 </Link>}          
                             </div>)

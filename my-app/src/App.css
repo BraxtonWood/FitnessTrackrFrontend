@@ -282,14 +282,24 @@ label{
   margin-bottom: 0;
 }
 .activitiesFromActivitiesTitle{
-  color: #62a1c1;
-  margin-top: 5px;
-  margin-bottom: 0;
+  color: #4a4f5f;
+  text-decoration: none;
+  font-size: auto;
+  padding-left: 4px;
+  font-weight: 300;
 }
 .routineGoal{
   margin-top: 15px;
   margin-bottom: 7px;
   font-weight: bold;
+}
+.routineCreatorSearchable{
+  margin-top: 15px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+.routineCreatorSearchable:hover{
+text-decoration: underline
 }
 .routineInfoAndActivityDescription{
   margin-top: 0px;

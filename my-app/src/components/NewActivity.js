@@ -32,6 +32,10 @@ function NewActivity({token, setUserMessage, setSuccessStatus}) {
                 setSuccessStatus(true)
                 setUserMessage("Thanks for creating an activity. We are loading your routines so you can add it!")
                 navigate("/mymessages");
+            }else if(result.error === "Activity already exists" ){
+                setSuccessStatus(false)
+                setUserMessage("An activity with name Swimming already exists")
+                navigate("/mymessages");
             }else{
                 setSuccessStatus(false)
                 setUserMessage("There was an error creating your activity. Please try again")

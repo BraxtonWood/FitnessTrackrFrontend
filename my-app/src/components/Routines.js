@@ -79,10 +79,10 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
                 <div className='routineList'>
                     {displayRoutines.map(routines => <div className="routinesContainer" key = {routines.id}>
                         <h2 className='routineTitle' >{routines.name}</h2>
-                        <a className='routineGoal' onClick={()=>{
+                        <a className='routineCreatorSearchable' onClick={()=>{
                             setSearchTerm(routines.creatorName);
                             searchAndDisplay();
-                        }}>Created By:{routines.creatorName}</a>
+                        }}>Created By: {routines.creatorName}</a>
                         
 
                         
