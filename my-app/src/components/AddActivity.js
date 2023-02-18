@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
+function AddActivity({setUserMessage, routineId, setRoutineId}) {
     const [count, setCount]= useState("")
     const [duration, setDuration]= useState("")
     const [allActivities, setAllActivities] = useState([])

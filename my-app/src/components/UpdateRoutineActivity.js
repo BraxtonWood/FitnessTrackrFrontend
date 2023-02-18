@@ -47,7 +47,7 @@
    
      return (
        <div className="logIn_signUp_create_edit_container">
-           <h1 className="pageTitle">Update Routine Activity </h1>
+           <h1 className="pageTitle">Edit Routine Activity </h1>
            <form onSubmit={handleSubmit} className="form">
                <label>Duration</label><br/>
                <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineActivityDuration} onChange={(event) => setDuration(event.target.value)} onSubmit={(event) => setDuration(event.target.value)}  required/><br/>
