@@ -30,17 +30,15 @@ function NewRoutine({token, setToken, setUserMessage, setSuccessStatus}) {
         .then(response => response.json())
         .then(result => {
             console.log(result)
+            setName("");
+            setGoal("");
             if (result.creatorId) { 
                 setSuccessStatus(true)
                 setUserMessage(`Routine, ${result.name}, was created. Don't forget to add those activities and get moving!!`)
-                setName("");
-                setGoal("");
                 navigate("/mymessages")
             } else {
                 setSuccessStatus(true)
                 setUserMessage("There was an error creating your routine. Please try again.");
-                setName("");
-                setGoal("");
                 navigate("/mymessages")
             }           
         })

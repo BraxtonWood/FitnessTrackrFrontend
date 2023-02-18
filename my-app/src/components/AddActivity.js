@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
-
-function AddActivity({setUserMessage, routineId, setRoutineId}) {
+function AddActivity({setUserMessage, routineId, setRoutineId, setSuccessStatus}) {
     const [count, setCount]= useState("")
     const [duration, setDuration]= useState("")
     const [allActivities, setAllActivities] = useState([])
@@ -11,6 +10,8 @@ function AddActivity({setUserMessage, routineId, setRoutineId}) {
     console.log(singleActivity)
     console.log(allActivities)
     console.log(routineId)
+
+
 
     let navigate = useNavigate();
 
@@ -51,14 +52,21 @@ function AddActivity({setUserMessage, routineId, setRoutineId}) {
             }) 
             .then(response => response.json())
             .then(result => {
+                console.log(result)
+                setCount("");
+                setDuration("");
                 if (result.id) { 
-                    console.log(result)
-                    setUserMessage("")
-                    setCount("");
-                    setDuration("");
-                    navigate("/mymessages")
-                    setUserMessage("")
-                    setRoutineId("")
+                    setSuccessStatus(true)
+                    setUserMessage("We added that activity to your routine")
+                    navigate("/mymessages");
+                }else if (result.error === "Activity already exists on routine" ){
+                    setSuccessStatus(false)
+                    setUserMessage("That activity is already part of your routine. Please choose another.")
+                    navigate("/mymessages");
+                }else {
+                    setSuccessStatus(false)
+                    setUserMessage("There was an error adding that activity to your routine. Please try again")
+                    navigate("/mymessages");
                 }
             })
             .catch(err=>console.error(err));
@@ -85,6 +93,7 @@ function AddActivity({setUserMessage, routineId, setRoutineId}) {
             <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setCount(event.target.value)} required/><br/>
             <input className="submitButton" type="submit" value='Submit'></input>
         </form>
+        <Link className="signUp_NewActivity_Link" to="/newactivity">Activity you want isn't here? Create it!</Link>
     </div>
   );
 }

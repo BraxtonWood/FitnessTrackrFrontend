@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function NewActivity({token, setUserMessage}) {
+function NewActivity({token, setUserMessage, setSuccessStatus}) {
     const [name, setName]= useState("")
     const [description, setDescription]= useState("")
     setUserMessage("")
@@ -26,10 +26,19 @@ function NewActivity({token, setUserMessage}) {
         .then(response => response.json())
         .then(result => {
             console.log(result)
+            setName("");
+            setDescription("");
             if (result.id) { 
-                setUserMessage("Thanks for creating an activity!!")
-                setName("");
-                setDescription("");
+                setSuccessStatus(true)
+                setUserMessage("Thanks for creating an activity. We are loading your routines so you can add it!")
+                navigate("/mymessages");
+            }else if(result.error === "Activity already exists" ){
+                setSuccessStatus(false)
+                setUserMessage("An activity with name Swimming already exists")
+                navigate("/mymessages");
+            }else{
+                setSuccessStatus(false)
+                setUserMessage("There was an error creating your activity. Please try again")
                 navigate("/mymessages");
             }
         })

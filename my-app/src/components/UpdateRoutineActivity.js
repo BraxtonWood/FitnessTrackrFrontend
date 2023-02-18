@@ -4,7 +4,7 @@
    // import {getAllActivities} from "../api"
    
    
-   function UpdateRoutineActivity({setUserMessage, userMessage, routineActivityId, token, routineActivityCount, routineActivityDuration }) {
+   function UpdateRoutineActivity({setUserMessage, userMessage, routineActivityId, token, routineActivityCount, routineActivityDuration, setSuccessStatus }) {
       const [count, setCount]= useState()
       const [duration, setDuration]= useState()
    
@@ -31,18 +31,19 @@
          .then(response => response.json())
          .then(result => {
             console.log(result)
-               //     if (result.id) { 
-                       
-               //         setUserMessage("Your singleActivity was added")
-               //         setCount("");
-               //         setDuration("");
-               //         navigate("/mymessages")
-               //         setUserMessage("")
-               //         setRoutineActivityId("")
-               //     }
+            setCount("");
+            setDuration("")
+            if (result.id) { 
+               setSuccessStatus(true)
+               setUserMessage(`Your routine activity was updated`)
+               navigate("/mymessages");
+            }else {
+               setSuccessStatus(false)
+               setUserMessage("There was an error when updating your routine activity. Please try again")
+               navigate("/mymessages");
+            }
          })
          .catch(err=>console.error(err));
-   
       }  
    
      return (

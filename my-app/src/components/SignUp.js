@@ -33,7 +33,6 @@ function SignUp({username, setUsername, password, setPassword, setCurrentUsernam
                     setUsername("")
                     setPassword("")
                     setPasswordConfirm("")
-                
                     if (result.message === "thank you for signing up"){   
                         setUserMessage(`Thanks for signing up. Now create some routines and get active!`)
                         setSuccessStatus(true)

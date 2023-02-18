@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom';
 
 
 
-function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage, routineGoal, routineName}) {
+function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage, routineGoal, setSuccessStatus, routineName}) {
     const [name, setName]= useState()
     const [goal, setGoal]= useState()
+
+    
 
     const [isPublic, setIsPublic] = useState(false)
     let navigate = useNavigate();
@@ -31,12 +33,16 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
         .then(response => response.json())
         .then(result => {
             console.log(result)
+            setName();
+            setGoal()
             if (result.creatorId) { 
-                setUserMessage(`${result.name} was successfully updated`)
-                setName("");
+                setSuccessStatus(true)
+                setUserMessage(`Routine, ${result.name}, was successfully updated`)
                 navigate("/mymessages");
-                setUserMessage("")
-                setRoutineId("")
+            }else {
+                setSuccessStatus(false)
+                setUserMessage("There was an error when updating your routine. Please try again")
+                navigate("/mymessages");
             }
         })
         .catch(err=>console.error(err));
@@ -45,17 +51,17 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
 
     return (
         <div className="logIn_signUp_create_edit_container">
-            <h1 className="pageTitle">Edit activity </h1>
+            <h1 className="pageTitle">Edit Routine </h1>
             <form onSubmit={handleSubmit} className="form">
                 <label>Name</label><br/>
                 <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineName} onSubmit={(event) => setName(event.target.value)} onChange={(event) => setName(event.target.value)} required/><br/>
                 <label>Description</label><br/>
                 <input className="logIn_signUp_create_edit_entry"  defaultValue={routineGoal} onChange={(event) => setGoal(event.target.value)}  onSubmit={(event) => setGoal(event.target.value)} required/><br/>
-                <input className="submitButton" type="submit" value='Submit'></input>
                 <div className="isPublic">
-                <input type="checkbox" onChange={(event) => setIsPublic(true)}/><br/>
-                <label>Is this a public routine?</label>
-            </div>
+                    <input type="checkbox" onChange={(event) => setIsPublic(true)}/>
+                    <label>Is this a public routine?</label>
+                </div>
+                <input className="submitButton" type="submit" value='Submit'></input>
             </form>
         </div>
       );

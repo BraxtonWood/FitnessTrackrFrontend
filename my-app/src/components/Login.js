@@ -63,7 +63,7 @@ function Login({username, setUsername, password, setPassword, setToken, setCurre
             <input className="logIn_signUp_create_edit_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
             <input className="submitButton" type="submit" ></input>
         </form>
-        <Link className="signUpLink" to="/signup">Don't have an account? Sign Up here!</Link>
+        <Link className="signUp_NewActivity_Link" to="/signup">Don't have an account? Sign Up here!</Link>
     </div>
   );
 }
