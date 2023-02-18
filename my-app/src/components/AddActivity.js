@@ -1,39 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import {getAllActivities} from "../api"
 
 
-function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
+function AddActivity({setUserMessage, userMessage, routineId, setRoutineId, activities}) {
     const [count, setCount]= useState("")
     const [duration, setDuration]= useState("")
-    const [allActivities, setAllActivities] = useState([])
-    const [activity, setActivity] = useState({})
-    console.log(allActivities)
-    console.log(activity)
+    const [singleActivity, setSingleActivity] = useState({})
+    console.log(singleActivity)
 
     let navigate = useNavigate();
-
-
-    useEffect(() => {  
-        fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(result => {
-            setAllActivities(result);
-        })
-        .catch(err=>console.error(err));
-
-    },[]);
 
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        if(activity.length > 0 ){
-            const activityId = activity[0].id
+        if(singleActivity.length > 0 ){
+            const activityId = singleActivity[0].id
             console.log(activityId)
 
             fetch(`https://fitness-tracker-backend.onrender.com/api/routines/${routineId}/activities`, {
@@ -54,7 +37,7 @@ function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
             .then(result => {
                 if (result.id) { 
                     console.log(result)
-                    setUserMessage("Your activity was added")
+                    setUserMessage("Your singleActivity was added")
                     setCount("");
                     setDuration("");
                     //! I want to look at adding a set timeout to this
@@ -65,22 +48,21 @@ function AddActivity({setUserMessage, userMessage, routineId, setRoutineId}) {
             })
             .catch(err=>console.error(err));
         } else {
-            console.log("you must choose an activity")
+            console.log("you must choose an singleActivity")
         }
     }
 
   return (
     <div className="logIn_signUp_create_edit_container">
         <h1 className="pageTitle">Add an Activity </h1>
-        <h3 className="pageTitle">{userMessage}</h3>
         <form onSubmit={handleSubmit} className="form">
             <label>Choose an Activity</label><br/>
             <select 
             className="selectActivity" 
-            onChange={(event)=>setActivity(allActivities.filter((activity) => activity.name === event.target.value))}> 
+            onChange={(event)=>setSingleActivity(activities.filter((singleActivity) => singleActivity.name === event.target.value))}> 
                 <option></option>
-                {allActivities.map((activity, index) =>
-                <option key={ `${ index }:${ activity.name }`}>{activity.name}</option>)}
+                {activities.map((singleActivity, index) =>
+                <option key={ `${ index }:${ singleActivity.name }`}>{singleActivity.name}</option>)}
             </select><br/>
             <label>Count</label><br/>
             <input className="logIn_signUp_create_edit_entry" type="text" onChange={(event) => setCount(event.target.value)} required/><br/>

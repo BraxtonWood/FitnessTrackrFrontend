@@ -7,6 +7,7 @@ body {
   margin: 0;
 }
 
+/* * Header Styles * */
 .header {
   display: flex;
   flex-direction: column;
@@ -93,7 +94,7 @@ body {
   margin-right: 60px;
 }
 
-
+/* * Form & Message Styles * */
 .logIn_signUp_create_edit_container{
   display: flex;
   width: 400px;
@@ -110,11 +111,14 @@ body {
 }
 .pageTitle{
   color: #62a1c1;
+  margin-top: 30px;
 }
 .pageMessage{
   color: #4a4f5f;
-  margin-right: auto;
-  margin-left: auto;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 label{
   font-size: small;
@@ -157,6 +161,107 @@ label{
   justify-content: center;
   align-items: center;
   font-size: 18px;
+  font-weight: 200;
+  border-radius: 5px;
+}
+
+/* * MyRoutines Styles * */
+.mainBodyContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  color: #4a4f5f;
+}
+.mainRoutinesContainer{
+  display: flex;
+  flex-direction: row;
+}
+.linkContainer{
+  display: flex;
+}
+.newRoutinesLink{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: medium;
+}
+.routinesContainer{
+  display: flex; 
+  flex-direction: column;
+  width: 50vw;
+  height: auto;
+  color: dark;
+  justify-content: center;
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.2);
+}
+.routineTitle{
+  color: #62a1c1;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+.routineGoal{
+  margin-top: 15px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+.routineInfo{
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.activitiesContainer{
+  padding-left: 25px;
+}
+.activitiesTitle{
+  margin-top: 7px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  margin-left: 25px;
+}
+.activityTitle{
+  color: #548ba6;
+  margin-top: 0px;
+  margin-bottom: 12px;
+}
+.activityInfo{
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: 20px;
+}
+.edit_add_buttons{
+  display: flex;
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  text-decoration: underline solid #67aacb;
+  width: 65px;
+  height: 30px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  margin-right: 10px;
+  font-weight: 200;
+  border-radius: 5px;
+}
+.deleteButtons{
+  display: flex;
+  background-color:#f22439;
+  border: 1px solid #f22439;
+  color: #ecf9fb;
+  text-decoration: underline solid #f22439;
+  width: 65px;
+  height: 30px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
   font-weight: 200;
   border-radius: 5px;
 }

@@ -24,13 +24,14 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
     .then(result => {
       console.log(result);
       if (result.message === "you're logged in!") {
-        //setToken(result.token);
-        setToken(window.localStorage.setItem("token", result.token));
         console.log(token)
         setUsername("");
         setPassword("");
-        setCurrentUsername(window.localStorage.setItem("username", result.user.username));
-        navigate("/profile");
+        window.localStorage.setItem("username", result.user.username);
+        window.localStorage.setItem("token", result.token);
+        setCurrentUsername(window.localStorage.getItem("username"));
+        setToken(window.localStorage.getItem("token"));
+        navigate("/myroutines");
       } else {
         alert("User not found. Please create an account.");
         setUsername("");
@@ -46,6 +47,7 @@ function Login({username, setUsername, password, setPassword, token, setToken, s
   return (
     <div className="logIn_signUp_create_edit_container">
         <h1 className="pageTitle">Log In </h1>
+        
         <form onSubmit={handleSubmit} className="form">
             <label>User Name</label><br/>
             <input className="logIn_signUp_create_edit_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>

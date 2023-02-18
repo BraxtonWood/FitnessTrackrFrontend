@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function NewRoutine({token, setUserMessage}) {
+function NewRoutine({token, setToken, setUserMessage, setSuccessStatus}) {
     const [name, setName]= useState("")
     const [goal, setGoal]= useState("")
     const [isPublic, setIsPublic] = useState(false)
-    setUserMessage("")
+    setToken(window.localStorage.getItem("token"))
+
     let navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -30,11 +31,18 @@ function NewRoutine({token, setUserMessage}) {
         .then(result => {
             console.log(result)
             if (result.creatorId) { 
-                setUserMessage("Thanks for creating a routine we are loading your routines so you can add some activities and get moving!!")
+                setSuccessStatus(true)
+                setUserMessage(`Routine, ${result.name}, was created. Don't forget to add those activities and get moving!!`)
                 setName("");
                 setGoal("");
-                navigate("/mymessages");
-            }
+                navigate("/mymessages")
+            } else {
+                setSuccessStatus(true)
+                setUserMessage("There was an error creating your routine. Please try again.");
+                setName("");
+                setGoal("");
+                navigate("/mymessages")
+            }           
         })
         .catch(err=>console.error(err));
 

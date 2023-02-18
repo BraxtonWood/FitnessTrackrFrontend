@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {Routes, Route} from 'react-router-dom';
+import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
 
-function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}){
-    setToken(window.localStorage.getItem("token"));
+function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUserRoutines, setRoutineActivityId}){
     console.log("token:",token);
-    const[userRoutines, setUserRoutines] = useState([]);
     
     const handleDeleteRoutine = async (routineId) => {
         fetch(`https:fitness-tracker-backend.onrender.com/api/routines/${routineId}`, {
@@ -39,9 +36,9 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
 
 
     const getUserRoutines = async () => {
+        
         console.log("fetchUserRoutines:", currentUsername);
-        //'http://fitnesstrac-kr.herokuapp.com/api/routines'
-        //'https://fitness-tracker-backend.onrender.com/api/users/${username}/routines'
+
         fetch(`https:fitness-tracker-backend.onrender.com/api/users/${currentUsername}/routines`, {
             headers: {
               'Content-Type': 'application/json',
@@ -60,71 +57,62 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
         const renderHelper = () => {
             if(!token){
                 return <>
-                <div className='routineHeader'>
-                <h1 className='routineTitle'>My Routines:</h1>
+                <div className='mainBodyContainer'>
+                <h1 className='routineTitle'>My Routines</h1>
                 <h2>Log in or Sign Up To View Personal Routines</h2>
-                
-                <Link to='/signup'> 
-                    <button type="button">
-                        Sign In
-                    </button>
-                </Link>
-                <Link to='/login'>
-                    <button type="button">
-                        Log In
-                    </button>
-                </Link>
+                <div className="linkContainer">
+                <Link className="userControlsLoginLinkLeft" to='/signup'>Sign In</Link>
+                <Link className="userControlsLoginLinkRight" to='/login'>Log In</Link>
+                </div>
             </div>
                 </>
             }else if (userRoutines[0]){
                 return <>
-                <div className='routineContainer'>
-                <Link to='/newroutine'> 
-                    <button type="button">
-                       New Routine 
-                    </button>
-                </Link>  
-                <div className='routineList'>
-                {userRoutines.map(routine => <div className="routineItem" key = {routine.id}>
-                    <h3>{routine.name}</h3>
-                    <div>IsPublic: {routine.isPublic.toString()}</div>
-                    <div>Goal: {routine.goal}</div>
+                <div className='mainBodyContainer'>
+                <h1 className="pageTitle">My Routines</h1>
+                <Link className="newRoutineLink" to="/newroutine">Add a new Routine</Link>
+                <div className=''>
+                {userRoutines.map(routine => <div className="routinesContainer" key = {routine.id}>
+                    <h2 className="routineTitle">{routine.name}</h2>
+                    <div className="routineGoal" >Goal: {routine.goal}</div>
+                    {(routine.isPublic) && <div className="routineInfo">Public routine</div>}
+                    {(!routine.isPublic) && <div className="routineInfo">Private routine</div>}
+
                     {/* CHANGE LINK TO EDIT POPUP */}
                     <div className="editDeleteButtons">
                     <Link to='/updateroutine'> 
-                        <button type="button" onClick={()=> {setRoutineId(routine.id)}}>
+                        <button className="edit_add_buttons" type="button" onClick={()=> {setRoutineId(routine.id)}}>
                             Edit Routine
                         </button>
                     </Link>
-                    
-                    <button type='button' onClick={()=> {handleDeleteRoutine(routine.id)}}>
-                        Delete Routine
-                    </button>
-                    
                     <Link to='/addactivity'>
-                        <button type='button' onClick={()=> {setRoutineId(routine.id)}}>
+                        <button className="edit_add_buttons" type='button' onClick={()=> {setRoutineId(routine.id)}}>
                             Add Activities
                         </button>
                     </Link>
+                    <button className="deleteButtons" type='button' onClick={()=> {handleDeleteRoutine(routine.id)}}>
+                        Delete Routine
+                    </button>
+                    
+
                     </div>
-                    <h4>Activities:</h4>
+                    <h3 className="activitiesTitle">Activities:</h3>
                         <div>{routine.activities.map(activity => 
-                            <div className='Activity' key={activity.routineActivityId}>
-                                <h4>{activity.name}</h4>
-                                <p>Description: {activity.description}</p>
-                                <p>Duration: {activity.duration}</p>
-                                <p>Count: {activity.count}</p>
+                            <div className='activitiesContainer' key={activity.routineActivityId}>
+                                <h4 className="activityTitle">{activity.name}</h4>
+                                <p className="activityInfo" >Description: {activity.description}</p>
+                                <p className="activityInfo" >Duration: {activity.duration}</p>
+                                <p className="activityInfo">Count: {activity.count}</p>
                                 <div className="editDeleteButtons">
                                 <Link to='/updateroutineactivity'> 
-                                <button type="button" onClick={()=> {setRoutineId(routine.id)}}>
+                                <button className="edit_add_buttons" type="button" onClick={()=> {setRoutineActivityId(activity.routineActivityId)}}>
                                     Edit Activity
                                 </button>
                                 </Link>
-                                
-                                <button type='button' onClick={()=> {
+                                <button className="deleteButtons" type='button' onClick={()=> {
                                     console.log('activity:',activity);
                                     handleDeleteRoutineActivity(activity.routineActivityId)}}>
-                                    Delete Activity
+                                    Remove Activity
                                 </button>
         
                                 </div>
@@ -139,12 +127,10 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
                 </>
             }else {
                 return <>
-                <h1>No Routines? Create One:</h1>
-                <Link to='/newroutine'> 
-                    <button type="button">
-                       New Routine 
-                    </button>
-                </Link>
+                <div className="mainBodyContainer">
+                <h1>No Routines? Create One!</h1>
+                <Link className="newRoutineLink" to="/newroutine">Add a new Routine</Link>
+                </div>
                 </>
             }
         }
@@ -152,7 +138,7 @@ function MyRoutines({ setToken, routineId, setRoutineId, token, currentUsername}
 
 
     return (<>
-    <h1>My Routines:</h1>
+    
     <div>{renderHelper()}</div>
     
     </>

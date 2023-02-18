@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage}) {
+function NewRoutine({setToken, token, setUserMessage, routineId, setRoutineId, userMessage}) {
     const [name, setName]= useState("")
     const [goal, setGoal]= useState("")
     const [isPublic, setIsPublic] = useState(false)
     let navigate = useNavigate();
-    //!! take this out only for testing 
-    setRoutineId(8)
-    console.log("🚀 ~ file: UpdateRoutine.js:6 ~ NewRoutine ~ token", token)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -22,7 +19,7 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
             },
             body: JSON.stringify(
                 {
-                  routineId: routineId,
+                  id: routineId,
                   name: name,
                   goal: goal,
                   isPublic: isPublic
@@ -33,11 +30,9 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
         .then(result => {
             console.log(result)
             if (result.creatorId) { 
-                setUserMessage("We updated your routine we are loading your routines so you can add some activities and get moving!!")
+                setUserMessage(`${result.name} was successfully updated`)
                 setName("");
-                setGoal("");
-                //! i want to look at a set timeout for the navigate
-                // navigate("/mymessages");
+                navigate("/mymessages");
                 setUserMessage("")
                 setRoutineId("")
             }
