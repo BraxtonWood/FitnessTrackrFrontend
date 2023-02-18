@@ -285,18 +285,20 @@ label{
 }
 .routineContainer {
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-start;
   flex-grow: 1;
+ 
   
   /* width: 100%; */
 }
 .routineItem {
-  width: 28%;
-  margin: 5px;
   
-  background-color: lightgrey;
+  margin: 5px;
+  background-color: #67aacb;
+
+  
 
 }
 .activityContainer {
@@ -307,15 +309,17 @@ label{
   flex-wrap: wrap;
   justify-content: space-evenly;
   
+  
 }
 .activityItem {
-  width: 30%;
-  display:flex;
+  
+  
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  background-color: lightgrey;
-  margin: 5px;
+  justify-content: left;
+  background-color: #ebf0f3;
+  
+  
 }
 .editDeleteButtons {
   display: flex;

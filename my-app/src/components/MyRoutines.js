@@ -55,6 +55,7 @@ function MyRoutines({setRoutineId, token, currentUsername, userRoutines, setUser
             getUserRoutines();
         }, []);
         const renderHelper = () => {
+            console.log('render');
             if(!token){
                 return <>
                 <div className='mainBodyContainer'>
