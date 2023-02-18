@@ -3,9 +3,9 @@
 import React, { useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, setDisplayRoutines, searchTerm, setSearchTerm}) => {
-    //const[searchTerm, setSearchTerm] = useState('');
-    //const[displayRoutines, setDisplayRoutines] = useState(publicRoutines);
+const Routines = ({token, publicRoutines, setPublicRoutines}) => {
+    const[searchTerm, setSearchTerm] = useState('');
+    const[displayRoutines, setDisplayRoutines] = useState(publicRoutines);
     console.log("displayRoutines:",displayRoutines);
 
     const getRoutines = () => {
@@ -18,7 +18,6 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
           .then(result => {
             console.log("result", result);
             setPublicRoutines(result);
-            setDisplayRoutines(result);
           })
           .catch(console.error);
     }
@@ -40,28 +39,25 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
 
     const searchAndDisplay = (event) =>{
         if(event){
-        event.preventDefault();
+            event.preventDefault();
         }
-        //console.log("event", event);
-        
-        
         
         setDisplayRoutines(publicRoutines.filter(routine => postMatches(routine, searchTerm)))
     }
     const searchUserOnclick = async (creatorName) =>{
-        console.log("searchUser");
+        console.log("searchUser", creatorName);
         setSearchTerm(creatorName);
+        
+        
         searchAndDisplay();
 
     }
    useEffect(() => {
         getRoutines();
         searchAndDisplay();
-        //searchUserOnclick()
-    }, []);
+    },[]);
 
     const renderHelper = () => {
-        if(displayRoutines){
         return <>
             <div className='mainBodyContainer' >
                 <h1 className='routineTitle'>Public Routines</h1>
@@ -70,8 +66,8 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
                 <form className='searchBarContainer' onSubmit={searchAndDisplay}>
                     <input type="text" className='searchBar' placeholder="Search" value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}></input>
-                    <button type="submit" className="searchBarButtons">Search</button>
-                    <button type="submit" className="searchBarButtons" onClick={()=>{
+                    <button type="submit" className="userControlsLoginLinkLeft">Search</button>
+                    <button type="submit" className="userControlsLoginLinkLeft" onClick={()=>{
                     setSearchTerm('');
                     setDisplayRoutines(publicRoutines);
                     }}>Clear</button>
@@ -79,14 +75,9 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
                 <div className='routineList'>
                     {displayRoutines.map(routines => <div className="routinesContainer" key = {routines.id}>
                         <h2 className='routineTitle' >{routines.name}</h2>
-                        <a className='routineGoal' onClick={()=>{
-                            setSearchTerm(routines.creatorName);
-                            searchAndDisplay();
-                        }}>Created By:{routines.creatorName}</a>
-                        
-
-                        
-                        
+                        <a className="routineGoal" onClick={()=>{
+                            searchUserOnclick(routines.creatorName);  
+                        }}>Created By: {routines.creatorName}</a>
                         <div className='routineInfoAndActivityDescription' >Goal: {routines.goal}</div>
                             <h3 className="publicRoutinesActivitiesTitle">Activities</h3>
                             <div>{routines.activities.map(activity => 
@@ -102,11 +93,6 @@ const Routines = ({token, publicRoutines, setPublicRoutines, displayRoutines, se
                 </div>            
             </div> 
         </>
-        }else {
-            <>
-            <h1>Nothing to show</h1>
-            </>
-        }
 
     }
     
