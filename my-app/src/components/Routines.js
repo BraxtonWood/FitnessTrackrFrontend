@@ -77,7 +77,7 @@ const Routines = ({token, publicRoutines, setPublicRoutines}) => {
                         <h2 className='routineTitle' >{routines.name}</h2>
                         <a className="routineGoal" onClick={()=>{
                             searchUserOnclick(routines.creatorName);  
-                        }}>Created By:{routines.creatorName}</a>
+                        }}>Created By: {routines.creatorName}</a>
                         <div className='routineInfoAndActivityDescription' >Goal: {routines.goal}</div>
                             <h4 className="publicRoutinesActivitiesTitle">Activities</h4>
                             <div>{routines.activities.map(activity => 

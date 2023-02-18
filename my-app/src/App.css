@@ -9,6 +9,9 @@ body {
   padding-left: 0; padding-right: 0;
   overflow-x: hidden
 }
+.workoutPhoto{
+  max-width: 100vh;
+}
 
 /* * Header Styles * */
 .header {

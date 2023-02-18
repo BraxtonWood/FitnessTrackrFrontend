@@ -43,26 +43,23 @@ function NewRoutine({token, setUserMessage, routineId, setRoutineId, userMessage
 
     }
 
-  return (
-    <div className="logIn_signUp_create_edit_container">
-        <h1 className="pageTitle">Update your routine </h1>
-        <form onSubmit={handleSubmit} className="form">
-            <label>Name</label><br/>
-            <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineName} onChange={(event) => setName(event.target.value)} onSubmit={(event) => setName(event.target.value)} required/><br/>
-            <label>Goal</label><br/>
-            <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineGoal} onChange={(event) => setGoal(event.target.value)} onSubmit={(event) => setGoal(event.target.value)} required/><br/>
-            <div className="isPublic">
+    return (
+        <div className="logIn_signUp_create_edit_container">
+            <h1 className="pageTitle">Edit activity </h1>
+            <form onSubmit={handleSubmit} className="form">
+                <label>Name</label><br/>
+                <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={routineName} onSubmit={(event) => setName(event.target.value)} onChange={(event) => setName(event.target.value)} required/><br/>
+                <label>Description</label><br/>
+                <input className="logIn_signUp_create_edit_entry"  defaultValue={routineGoal} onChange={(event) => setGoal(event.target.value)}  onSubmit={(event) => setGoal(event.target.value)} required/><br/>
+                <input className="submitButton" type="submit" value='Submit'></input>
+                <div className="isPublic">
                 <input type="checkbox" onChange={(event) => setIsPublic(true)}/><br/>
                 <label>Is this a public routine?</label>
             </div>
-            
-            <Link to='/myroutines'>
-                <input className="submitButton" type="submit" value='Submit'></input>
-            </Link>
-            
-        </form>
-    </div>
-  );
-}
+            </form>
+        </div>
+      );
+    }
+
 
 export default NewRoutine;
