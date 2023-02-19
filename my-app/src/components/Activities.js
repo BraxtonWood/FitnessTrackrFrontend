@@ -4,12 +4,11 @@ import {Link} from 'react-router-dom';
 
 
 
-const Activities = ({token, activities, setActivities, setActivityId, setActivityDescription, setActivityName, searchTerm, setSearchTerm}) => {
+const Activities = ({token, activities, setActivities, setActivityId, setActivityDescription, 
+    setActivityName, searchTerm, setSearchTerm, setRoutinesByActivityId}) => {
     //const[searchTerm, setSearchTerm] = useState('');
     const[displayActivities, setDisplayActivities] = useState(activities);
     const getActivities = () => {
-        
-
         console.log("getActivities called");
         console.log(token)
         fetch('https://fitness-tracker-backend.onrender.com/api/activities', {
@@ -20,6 +19,20 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
           .then(result => {
             console.log("activities result:", result);
             setActivities(result);
+          })
+          .catch(console.error);
+    }
+    const getRoutinesByActivityId = (activityId) => {
+        console.log("getRoutinesByActivityID called");
+        //console.log(token)
+        fetch(`https://fitness-tracker-backend.onrender.com/api/activities/${activityId}/routines`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then(response => response.json())
+          .then(result => {
+            console.log("routines by activities result:", result);
+            setRoutinesByActivityId(result);
           })
           .catch(console.error);
     }
@@ -81,9 +94,11 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
                         </form>
                         {activities.map(activity => 
                             <div className="activityContainer" key = {activity.id}>
-                                <a onClick={()=>{setSearchTerm(activity.id);
-                                }} className='activitiesFromActivitiesTitle'><Link to='/routines'>{activity.name}</Link>
-                                </a>
+                                <Link to='/routines' className='activitiesFromActivitiesTitle' onClick={()=>{
+                                    getRoutinesByActivityId(activity.id);
+                                    setSearchTerm(activity.name);
+                                }} >{activity.name}</Link>
+                                
                                 <p>Description: {activity.description}</p> 
                                 {(token) && <Link to='/updateActivity'> 
                                 <button className="edit_add_buttons" type="button" onClick={()=> {
@@ -116,11 +131,13 @@ const Activities = ({token, activities, setActivities, setActivityId, setActivit
                         setDisplayActivities(activities);
                         }}>Clear</button>
                         </form>
-                        {displayActivities.map(activity => 
+                        {activities.map(activity => 
                             <div className="activityContainer" key = {activity.id}>
-                                <a onClick={()=>{setSearchTerm(activity.id);
-                                }} className='activitiesFromActivitiesTitle'><Link to='/routines'>{activity.name}</Link>
-                                </a>
+                                <Link to='/routines'className='activitiesFromActivitiesTitle' onClick={()=>{
+                                    getRoutinesByActivityId(activity.id);
+                                    setSearchTerm(activity.name);
+                                }}>{activity.name}</Link>
+                                
                                 <p>Description: {activity.description}</p> 
                                 {(token) && <Link to='/updateActivity'> 
                                 <button className="edit_add_buttons" type="button" onClick={()=> {
