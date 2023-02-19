@@ -24,6 +24,7 @@ function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"))
   const [currentUsername, setCurrentUsername] = useState(window.localStorage.getItem("username"));
   const [publicRoutines, setPublicRoutines] = useState([]);
+  const [routinesByActivityId, setRoutinesByActivityId] = useState([]);
   const [userMessage, setUserMessage] = useState("");
   const [activities, setActivities] = useState([]);
   const [routineId, setRoutineId] = useState("");
@@ -50,8 +51,8 @@ function App() {
           <Route path="/" element={ <Home/> } />
  
         {/* // *Main page Routes */}
-          <Route path="/routines" element={<Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  displayRoutines={displayRoutines} setDisplayRoutines={setDisplayRoutines} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> } />
-          <Route path="/activities" element={<Activities activities={activities} setActivities={setActivities} token={token} setActivityId={setActivityId} setActivityDescription={setActivityDescription} setActivityName={setActivityName} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> } />
+          <Route path="/routines" element={<Routines token={token} routinesByActivityId={routinesByActivityId} setRoutinesByActivityId={setRoutinesByActivityId} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines}  displayRoutines={displayRoutines} setDisplayRoutines={setDisplayRoutines} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> } />
+          <Route path="/activities" element={<Activities activities={activities} setActivities={setActivities} routinesByActivityId={routinesByActivityId} setRoutinesByActivityId={setRoutinesByActivityId} token={token} setActivityId={setActivityId} setActivityDescription={setActivityDescription} setActivityName={setActivityName} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> } />
           <Route path="/myroutines" element={<MyRoutines userRoutines={userRoutines} routineActivityId={setRoutineActivityId} setRoutineActivityId={setRoutineActivityId} setUserRoutines={setUserRoutines} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} token={token} setToken={setToken} routineId={routineId} setRoutineId={setRoutineId} setRoutineName={setRoutineName} routineDescription={routineGoal} setRoutineGoal={setRoutineGoal} setRoutineActivityCount={setRoutineActivityCount} setRoutineActivityDuration={setRoutineActivityDuration}/>}/>
 
         {/* // *User form Routes */}
