@@ -15,7 +15,7 @@
          event.preventDefault()
          console.log(routineActivityId)
    
-         fetch(`https:fitness-tracker-backend.onrender.com/api/routine_activities/${routineActivityId}`, {
+         fetch(`https://fitness-tracker-backend.onrender.com/api/routine_activities/${routineActivityId}`, {
             method: "PATCH",
             headers: {
                'Content-Type': 'application/json',
