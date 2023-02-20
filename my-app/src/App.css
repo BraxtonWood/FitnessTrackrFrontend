@@ -282,11 +282,14 @@ label{
   margin-bottom: 0;
 }
 .activitiesFromActivitiesTitle{
-  color: #4a4f5f;
+  color: #62a1c1;
   text-decoration: none;
   font-size: auto;
   padding-left: 4px;
-  font-weight: 300;
+  font-weight: bold;
+}
+.activitiesFromActivitiesTitle:hover{
+  text-decoration: underline
 }
 .routineGoal{
   margin-top: 15px;
