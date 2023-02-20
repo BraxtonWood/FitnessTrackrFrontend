@@ -50,7 +50,7 @@ function NewActivity({setUserMessage, activityId, activityName, activityDescript
         <h1 className="pageTitle">Edit activity </h1>
         <form onSubmit={handleSubmit} className="form">
             <label>Name</label><br/>
-            <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={activityName} onSubmit={(event) => setName(event.target.value)} onChange={(event) => setName(event.target.value)} readonly required/><br/>
+            <input className="logIn_signUp_create_edit_entry" type="text" defaultValue={activityName} onSubmit={(event) => setName(event.target.value)} readonly="true" required/><br/>
             <label>Description</label><br/>
             <input className="logIn_signUp_create_edit_entry"  defaultValue={activityDescription} onChange={(event) => setDescription(event.target.value)}  onSubmit={(event) => setDescription(event.target.value)} required/><br/>
             <input className="submitButton" type="submit" value='Submit'></input>

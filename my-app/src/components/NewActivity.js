@@ -18,7 +18,7 @@ function NewActivity({token, setUserMessage, setSuccessStatus}) {
             },
             body: JSON.stringify(
                 {
-                  name: name.trim(),
+                  name: name.trim().toLowerCase(),
                   description: description,
                 }
             )
@@ -34,7 +34,7 @@ function NewActivity({token, setUserMessage, setSuccessStatus}) {
                 navigate("/mymessages");
             }else if(result.error === "Activity already exists" ){
                 setSuccessStatus(false)
-                setUserMessage("An activity with name Swimming already exists")
+                setUserMessage(result.message)
                 navigate("/mymessages");
             }else{
                 setSuccessStatus(false)
